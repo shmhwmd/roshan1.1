@@ -1,0 +1,1241 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>کافه لویال | منو و سفارش آنلاین</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lalezar&family=Vazirmatn:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+/* ============================================================
+   کافه لویال — Stylesheet
+   Design tokens: deep espresso hero, Persian-rug crimson accent,
+   saffron-gold secondary accent, warm ivory content sections.
+   Type: Lalezar (display/personality) + Vazirmatn (body/UI).
+   ============================================================ */
+
+:root{
+  --color-bg-dark: #1B120C;
+  --color-bg-dark-2: #241A11;
+  --color-cream: #FBF5EA;
+  --color-cream-2: #F3EAD7;
+  --color-card: #FFFDF9;
+  --color-ink: #2B2018;
+  --color-ink-soft: #6E5C49;
+  --color-red: #B8272C;
+  --color-red-dark: #8F1D22;
+  --color-gold: #C9973E;
+  --color-gold-light: #E4C077;
+  --color-green: #6B7A4F;
+  --color-border: #E7DCC8;
+
+  --font-display: 'Lalezar', 'Vazirmatn', sans-serif;
+  --font-body: 'Vazirmatn', system-ui, sans-serif;
+
+  --radius-lg: 20px;
+  --radius-md: 14px;
+  --radius-sm: 8px;
+  --shadow-soft: 0 18px 30px rgba(43,32,24,.12);
+  --transition: .25s ease;
+}
+
+/* ---------- reset ---------- */
+*, *::before, *::after{ box-sizing: border-box; }
+*{ margin:0; padding:0; }
+html{ scroll-behavior: smooth; }
+img{ max-width:100%; display:block; }
+a{ text-decoration:none; color:inherit; }
+ul{ list-style:none; }
+button{ font:inherit; cursor:pointer; border:none; background:none; color:inherit; }
+input, textarea{ font:inherit; }
+
+body{
+  direction: rtl;
+  font-family: var(--font-body);
+  font-weight: 400;
+  color: var(--color-ink);
+  background: var(--color-cream);
+  line-height: 1.75;
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
+}
+
+.container{
+  max-width: 1180px;
+  margin-inline: auto;
+  padding-inline: 24px;
+}
+
+:focus-visible{
+  outline: 3px solid var(--color-gold);
+  outline-offset: 3px;
+}
+
+.skip-link{
+  position:absolute;
+  right:16px; top:-60px;
+  background:var(--color-red); color:#fff;
+  padding:10px 18px; border-radius:var(--radius-sm);
+  transition: top .2s ease;
+  z-index: 200;
+}
+.skip-link:focus{ top:16px; }
+
+/* ---------- header ---------- */
+.site-header{
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: var(--color-bg-dark);
+  border-bottom: 1px solid rgba(251,245,234,.08);
+}
+
+.header-inner{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap: 24px;
+  padding-block: 16px;
+}
+
+.logo{
+  font-family: var(--font-display);
+  font-size: 1.65rem;
+  color: var(--color-cream);
+  letter-spacing: .5px;
+  flex-shrink: 0;
+}
+.logo span{ color: var(--color-gold); }
+
+.main-nav{
+  display:flex;
+  align-items:center;
+  gap: 30px;
+}
+.main-nav a{
+  font-weight: 600;
+  font-size: .98rem;
+  color: rgba(251,245,234,.85);
+  padding-block: 6px;
+  position: relative;
+}
+.main-nav a::after{
+  content:'';
+  position:absolute;
+  right:0; bottom:0;
+  height:2px; width:0;
+  background: var(--color-gold);
+  transition: width var(--transition);
+}
+.main-nav a:hover,
+.main-nav a.active{ color: var(--color-cream); }
+.main-nav a:hover::after,
+.main-nav a.active::after{ width:100%; }
+
+.nav-toggle{
+  display:none;
+  flex-direction:column;
+  justify-content:center;
+  gap:5px;
+  width: 40px; height: 40px;
+  padding: 8px;
+}
+.nav-toggle span{
+  display:block; height:2px; width:100%;
+  background: var(--color-cream);
+  border-radius: 2px;
+  transition: transform var(--transition), opacity var(--transition);
+}
+.nav-toggle.open span:nth-child(1){ transform: translateY(7px) rotate(45deg); }
+.nav-toggle.open span:nth-child(2){ opacity:0; }
+.nav-toggle.open span:nth-child(3){ transform: translateY(-7px) rotate(-45deg); }
+
+/* ---------- buttons ---------- */
+.btn-primary{
+  display:inline-block;
+  background: var(--color-red);
+  color:#fff;
+  font-weight:700;
+  padding: 14px 34px;
+  border-radius: var(--radius-sm);
+  transition: background var(--transition), transform var(--transition);
+}
+.btn-primary:hover{
+  background: var(--color-red-dark);
+  transform: translateY(-2px);
+}
+
+/* ---------- hero ---------- */
+.hero{
+  background: radial-gradient(circle at 15% 15%, #2B1D12 0%, var(--color-bg-dark) 55%);
+  overflow: hidden;
+}
+.hero-inner{
+  display:flex;
+  align-items:center;
+  gap: 56px;
+  padding-block: 88px 64px;
+}
+.hero-text{ flex: 1 1 440px; }
+.hero-text > *{ animation: fadeUp .7s ease both; }
+.hero-text > *:nth-child(2){ animation-delay:.08s; }
+.hero-text > *:nth-child(3){ animation-delay:.16s; }
+.hero-text > *:nth-child(4){ animation-delay:.24s; }
+
+.hero-kicker{
+  color: var(--color-gold);
+  font-weight:600;
+  margin-bottom: 14px;
+  font-size: .98rem;
+}
+.hero-title{
+  font-family: var(--font-display);
+  font-size: clamp(2.5rem, 5.2vw, 4.1rem);
+  line-height: 1.28;
+  color: var(--color-cream);
+  margin-bottom: 22px;
+}
+.hero-desc{
+  color: rgba(251,245,234,.82);
+  max-width: 48ch;
+  margin-bottom: 34px;
+  font-size: 1.06rem;
+}
+
+.hero-media{
+  flex: 1 1 420px;
+  position: relative;
+}
+.hero-media::before{
+  content:'';
+  position:absolute;
+  inset: -26px;
+  background: radial-gradient(circle at 30% 20%, rgba(201,151,62,.35), transparent 62%);
+  filter: blur(18px);
+  z-index:0;
+}
+.hero-media img{
+  position: relative;
+  z-index:1;
+  width:100%;
+  height: 560px;
+  object-fit: cover;
+  border-radius: var(--radius-lg);
+  box-shadow: 0 30px 60px rgba(0,0,0,.5);
+}
+
+@keyframes fadeUp{
+  from{ opacity:0; transform: translateY(18px); }
+  to{ opacity:1; transform: translateY(0); }
+}
+
+/* ---------- sections ---------- */
+.section{ padding-block: 84px; }
+.section-alt{ background: var(--color-cream-2); }
+
+.section-head{
+  text-align:center;
+  max-width: 640px;
+  margin: 0 auto 48px;
+}
+.section-title{
+  font-family: var(--font-display);
+  font-size: clamp(1.85rem, 3.2vw, 2.6rem);
+  color: var(--color-ink);
+}
+.section-desc{
+  color: var(--color-ink-soft);
+  margin-top: 12px;
+  font-size: 1rem;
+}
+
+/* ---------- food grid & cards ---------- */
+.food-grid{
+  display:grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 28px;
+}
+.food-grid--3col{
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.food-card{
+  background: var(--color-card);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  transition: transform var(--transition), box-shadow var(--transition);
+}
+.food-card:hover{
+  transform: translateY(-6px);
+  box-shadow: var(--shadow-soft);
+}
+.food-card-img{
+  aspect-ratio: 4 / 3;
+  overflow:hidden;
+  background: var(--color-cream-2);
+}
+.food-card-img img{
+  width:100%; height:100%;
+  object-fit: cover;
+  transition: transform .5s ease;
+}
+.food-card:hover .food-card-img img{ transform: scale(1.07); }
+
+.food-card-body{ padding: 18px 20px 22px; }
+.food-card-name{
+  font-weight: 700;
+  font-size: 1.14rem;
+  margin-bottom: 8px;
+}
+.food-card-ingredients{
+  font-size: .87rem;
+  color: var(--color-ink-soft);
+  line-height: 1.65;
+  margin-bottom: 16px;
+}
+.food-card-ingredients--clamp{
+  display:-webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow:hidden;
+  min-height: 2.9em;
+}
+.food-card-footer{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap: 10px;
+}
+.food-price{
+  font-weight: 800;
+  color: var(--color-red);
+  font-size: 1.02rem;
+  white-space: nowrap;
+}
+.food-tag{
+  font-size: .72rem;
+  font-weight:600;
+  color: var(--color-green);
+  background: rgba(107,122,79,.13);
+  padding: 4px 12px;
+  border-radius: 20px;
+  white-space: nowrap;
+}
+
+/* ---------- category tiles ---------- */
+.category-grid{
+  display:grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 26px;
+}
+.category-tile{
+  position:relative;
+  display:block;
+  border-radius: var(--radius-lg);
+  overflow:hidden;
+  aspect-ratio: 16 / 10;
+  isolation:isolate;
+}
+.category-tile img{
+  width:100%; height:100%;
+  object-fit:cover;
+  transition: transform .6s ease;
+}
+.category-tile::after{
+  content:'';
+  position:absolute; inset:0;
+  background: linear-gradient(to top, rgba(20,12,7,.88), rgba(20,12,7,.05) 62%);
+  z-index:1;
+}
+.category-tile:hover img{ transform: scale(1.08); }
+.category-tile-label{
+  position:absolute;
+  inset-inline:0; bottom:0;
+  z-index:2;
+  padding: 26px;
+  display:flex;
+  align-items:flex-end;
+  justify-content:space-between;
+  gap: 12px;
+}
+.category-tile-label h3{
+  font-family: var(--font-display);
+  color:#fff;
+  font-size: 1.55rem;
+}
+.category-tile-label span{
+  color: var(--color-gold-light);
+  font-weight:600;
+  font-size: .9rem;
+  flex-shrink:0;
+}
+
+/* ---------- category page banner ---------- */
+.page-banner{
+  position:relative;
+  padding-block: 76px;
+  background-size: cover;
+  background-position: center;
+  color:#fff;
+}
+.page-banner::before{
+  content:'';
+  position:absolute; inset:0;
+  background: linear-gradient(to bottom, rgba(20,12,7,.72), rgba(20,12,7,.6));
+}
+.page-banner-inner{
+  position:relative; z-index:1;
+  text-align:center;
+}
+.page-banner h1{
+  font-family: var(--font-display);
+  font-size: clamp(2.1rem, 4.2vw, 3.1rem);
+}
+.page-banner p{
+  margin-top: 12px;
+  color: rgba(255,255,255,.85);
+  font-size: 1.05rem;
+}
+
+/* ---------- footer ---------- */
+.site-footer{
+  background: var(--color-bg-dark);
+  color: rgba(251,245,234,.78);
+  padding-block: 60px 26px;
+}
+.footer-grid{
+  display:grid;
+  grid-template-columns: 1.3fr 1fr 1fr;
+  gap: 44px;
+}
+.footer-brand h2{
+  font-family: var(--font-display);
+  color:#fff;
+  font-size: 1.6rem;
+  margin-bottom: 12px;
+}
+.footer-brand p{
+  max-width: 34ch;
+  font-size: .94rem;
+  color: rgba(251,245,234,.68);
+}
+.footer-col h4{
+  color:#fff;
+  font-weight:700;
+  margin-bottom: 16px;
+  font-size: 1.02rem;
+}
+.footer-col ul li{ margin-bottom: 10px; font-size: .94rem; }
+.footer-col a:hover{ color: var(--color-gold); }
+.footer-col p{ font-size:.94rem; margin-bottom:8px; color: rgba(251,245,234,.78); }
+
+.social-icons{
+  display:flex;
+  gap: 12px;
+  margin-top: 18px;
+}
+.social-icons a{
+  width: 38px; height:38px;
+  border-radius:50%;
+  border: 1px solid rgba(251,245,234,.3);
+  display:flex; align-items:center; justify-content:center;
+  transition: background var(--transition), border-color var(--transition);
+}
+.social-icons a:hover{
+  background: var(--color-red);
+  border-color: var(--color-red);
+}
+.social-icons svg{ width:17px; height:17px; fill: #fff; }
+
+.footer-bottom{
+  border-top: 1px solid rgba(251,245,234,.15);
+  margin-top: 44px;
+  padding-top: 22px;
+  text-align:center;
+  font-size: .85rem;
+  color: rgba(251,245,234,.5);
+}
+
+/* ---------- responsive ---------- */
+@media (max-width: 980px){
+  .food-grid{ grid-template-columns: repeat(2, 1fr); }
+  .food-grid--3col{ grid-template-columns: repeat(2, 1fr); }
+  .footer-grid{ grid-template-columns: 1fr 1fr; }
+  .footer-brand{ grid-column: 1 / -1; }
+}
+
+@media (max-width: 760px){
+  .nav-toggle{ display:flex; }
+  .main-nav{
+    position:fixed;
+    inset-inline:0;
+    top: 65px;
+    background: var(--color-bg-dark-2);
+    flex-direction:column;
+    align-items:flex-start;
+    gap: 4px;
+    padding: 10px 24px 22px;
+    transform: translateY(-8px);
+    opacity:0;
+    visibility:hidden;
+    transition: opacity var(--transition), transform var(--transition), visibility var(--transition);
+    border-bottom: 1px solid rgba(251,245,234,.08);
+  }
+  .main-nav.open{
+    transform: translateY(0);
+    opacity:1;
+    visibility:visible;
+  }
+  .main-nav a{ width:100%; padding-block:12px; }
+
+  .hero-inner{ flex-direction: column; padding-block: 56px 40px; }
+  .hero-media img{ height: 320px; }
+  .hero-text, .hero-media{ flex-basis: auto; width:100%; }
+
+  .section{ padding-block: 56px; }
+  .category-grid{ grid-template-columns: 1fr; }
+}
+
+@media (max-width: 560px){
+  .food-grid, .food-grid--3col{ grid-template-columns: 1fr; }
+  .footer-grid{ grid-template-columns: 1fr; }
+}
+
+@media (prefers-reduced-motion: reduce){
+  *, *::before, *::after{
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+</style>
+</head>
+<body>
+
+<a class="skip-link" href="#main">رفتن به محتوای اصلی</a>
+
+<header class="site-header">
+  <div class="container header-inner">
+    <a href="#" class="logo" onclick="showPage('home')">کافه <span>لویال</span></a>
+    <nav class="main-nav" id="main-nav">
+      <a href="#" onclick="showPage('home')" class="active">خانه</a>
+      <a href="#" onclick="showPage('iranian')">غذای ایرانی</a>
+      <a href="#" onclick="showPage('fastfood')">فست‌فود</a>
+      <a href="#" onclick="showPage('drinks')">نوشیدنی</a>
+      <a href="#" onclick="showPage('sides')">مخلفات</a>
+    </nav>
+    <button class="nav-toggle" id="nav-toggle" aria-label="باز و بسته کردن منو" aria-expanded="false" aria-controls="main-nav">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<main id="main">
+
+  <!-- صفحه خانه -->
+  <section id="home" class="page active">
+    <div class="hero">
+      <div class="container hero-inner">
+        <div class="hero-text">
+          <p class="hero-kicker">به کافه لویال خوش آمدید</p>
+          <h1 class="hero-title">طعم اصیل،<br>وفاداری همیشگی</h1>
+          <p class="hero-desc">از چلوکباب سنتی ایرانی تا فست‌فود امروزی و نوشیدنی‌های خنک؛ در کافه لویال هر لقمه با مواد اولیه‌ی تازه و با عشق آماده می‌شود.</p>
+          <a href="#popular" class="btn-primary">مشاهده منو</a>
+        </div>
+        <div class="hero-media">
+          <img src="Pizza.jpg" alt="عکس اولیه" width="900" height="1000" loading="eager">
+        </div>
+      </div>
+    </div>
+
+    <div class="section" id="popular">
+      <div class="container">
+        <div class="section-head">
+          <h2 class="section-title">غذاهای محبوب</h2>
+          <p class="section-desc">پرطرفدارترین انتخاب‌های مشتریان کافه لویال، از میان همه‌ی دسته‌های منو</p>
+        </div>
+
+        <div class="food-grid">
+          <article class="food-card">
+            <div class="food-card-img">
+              <img src="Kebab.jpg" alt="چلو کباب کوبیده" loading="lazy">
+            </div>
+            <div class="food-card-body">
+              <h3 class="food-card-name">چلو کباب کوبیده</h3>
+              <p class="food-card-ingredients food-card-ingredients--clamp">گوشت چرخ‌کرده گوسفندی، پیاز رنده‌شده، برنج ایرانی، زعفران، کره</p>
+              <div class="food-card-footer">
+                <span class="food-price">۱۸۵,۰۰۰ تومان</span>
+                <span class="food-tag">غذای ایرانی</span>
+              </div>
+            </div>
+          </article>
+
+          <article class="food-card">
+            <div class="food-card-img">
+              <img src="jooje.jpg" alt="جوجه کباب" loading="lazy">
+            </div>
+            <div class="food-card-body">
+              <h3 class="food-card-name">جوجه کباب</h3>
+              <p class="food-card-ingredients food-card-ingredients--clamp">سینه مرغ، پیاز، آبلیمو، زعفران، رب گوجه‌فرنگی</p>
+              <div class="food-card-footer">
+                <span class="food-price">۱۹۵,۰۰۰ تومان</span>
+                <span class="food-tag">غذای ایرانی</span>
+              </div>
+            </div>
+          </article>
+
+          <article class="food-card">
+            <div class="food-card-img">
+              <img src="fesenjan.jpg" alt="فسنجان" loading="lazy">
+            </div>
+            <div class="food-card-body">
+              <h3 class="food-card-name">فسنجان</h3>
+              <p class="food-card-ingredients food-card-ingredients--clamp">مرغ، گردوی آسیاب‌شده، رب انار، پیاز، برنج ایرانی</p>
+              <div class="food-card-footer">
+                <span class="food-price">۲۱۰,۰۰۰ تومان</span>
+                <span class="food-tag">غذای ایرانی</span>
+              </div>
+            </div>
+          </article>
+
+          <article class="food-card">
+            <div class="food-card-img">
+              <img src="pizza2.jpg" alt="پیتزا مخصوص" loading="lazy">
+            </div>
+            <div class="food-card-body">
+              <h3 class="food-card-name">پیتزا مخصوص</h3>
+              <p class="food-card-ingredients food-card-ingredients--clamp">خمیر پیتزا، سس گوجه، پنیر پیتزا، مرغ و پپرونی، فلفل دلمه‌ای</p>
+              <div class="food-card-footer">
+                <span class="food-price">۱۶۰,۰۰۰ تومان</span>
+                <span class="food-tag">فست‌فود</span>
+              </div>
+            </div>
+          </article>
+
+          <article class="food-card">
+            <div class="food-card-img">
+              <img src="ham.jpg" alt="همبرگر" loading="lazy">
+            </div>
+            <div class="food-card-body">
+              <h3 class="food-card-name">همبرگر</h3>
+              <p class="food-card-ingredients food-card-ingredients--clamp">گوشت گوساله چرخ‌کرده، نان برگر، پنیر چدار، کاهو، گوجه، سس مخصوص</p>
+              <div class="food-card-footer">
+                <span class="food-price">۱۱۰,۰۰۰ تومان</span>
+                <span class="food-tag">فست‌فود</span>
+              </div>
+            </div>
+          </article>
+
+          <article class="food-card">
+            <div class="food-card-img">
+              <img src="dooq.jpg" alt="دوغ" loading="lazy">
+            </div>
+            <div class="food-card-body">
+              <h3 class="food-card-name">دوغ</h3>
+              <p class="food-card-ingredients food-card-ingredients--clamp">ماست، آب، نعنا خشک، نمک، گاز طبیعی</p>
+              <div class="food-card-footer">
+                <span class="food-price">۳۰,۰۰۰ تومان</span>
+                <span class="food-tag">نوشیدنی</span>
+              </div>
+            </div>
+          </article>
+
+          <article class="food-card">
+            <div class="food-card-img">
+              <img src="sharbat.jpg" alt="شربت آلبالو" loading="lazy">
+            </div>
+            <div class="food-card-body">
+              <h3 class="food-card-name">شربت آلبالو</h3>
+              <p class="food-card-ingredients food-card-ingredients--clamp">آلبالو، شکر، آب، یخ</p>
+              <div class="food-card-footer">
+                <span class="food-price">۳۵,۰۰۰ تومان</span>
+                <span class="food-tag">نوشیدنی</span>
+              </div>
+            </div>
+          </article>
+
+          <article class="food-card">
+            <div class="food-card-img">
+              <img src="shirazi.jpg" alt="سالاد شیرازی" loading="lazy">
+            </div>
+            <div class="food-card-body">
+              <h3 class="food-card-name">سالاد شیرازی</h3>
+              <p class="food-card-ingredients food-card-ingredients--clamp">خیار، گوجه، پیاز، آبلیمو، نعنا خشک، روغن زیتون</p>
+              <div class="food-card-footer">
+                <span class="food-price">۵۵,۰۰۰ تومان</span>
+                <span class="food-tag">مخلفات</span>
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="section section-alt">
+      <div class="container">
+        <div class="section-head">
+          <h2 class="section-title">دسته‌بندی منو</h2>
+          <p class="section-desc">برای دیدن منوی کامل هر بخش، روی دسته‌ی موردنظر بزنید</p>
+        </div>
+
+        <div class="category-grid">
+          <a class="category-tile" href="#" onclick="showPage('iranian')">
+            <img src="Iranian-food.jpg" alt="غذای ایرانی" loading="lazy">
+            <div class="category-tile-label">
+              <h3>غذای ایرانی</h3>
+              <span>مشاهده منو</span>
+            </div>
+          </a>
+          <a class="category-tile" href="#" onclick="showPage('fastfood')">
+            <img src="fast.jpg" alt="فست‌فود" loading="lazy">
+            <div class="category-tile-label">
+              <h3>فست‌فود</h3>
+              <span>مشاهده منو</span>
+            </div>
+          </a>
+          <a class="category-tile" href="#" onclick="showPage('drinks')">
+            <img src="drinks.jpg" alt="نوشیدنی" loading="lazy">
+            <div class="category-tile-label">
+              <h3>نوشیدنی</h3>
+              <span>مشاهده منو</span>
+            </div>
+          </a>
+          <a class="category-tile" href="#" onclick="showPage('sides')">
+            <img src="side.jpg" alt="مخلفات" loading="lazy">
+            <div class="category-tile-label">
+              <h3>مخلفات</h3>
+              <span>مشاهده منو</span>
+            </div>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- صفحه غذای ایرانی -->
+  <section id="iranian" class="page">
+    <div class="page-banner" style="background-image:url('Iranian-food.jpg')">
+      <div class="container page-banner-inner">
+        <h1>غذای ایرانی</h1>
+        <p>طعم اصیل ایران، از دیگ تا بشقاب شما</p>
+      </div>
+    </div>
+    <div class="section">
+      <div class="container">
+        <div class="food-grid food-grid--3col">
+          <article class="food-card">
+            <div class="food-card-img">
+              <img src="Kebab.jpg" alt="چلو کباب کوبیده" loading="lazy">
+            </div>
+            <div class="food-card-body">
+              <h3 class="food-card-name">چلو کباب کوبیده</h3>
+              <p class="food-card-ingredients">گوشت چرخ‌کرده گوسفندی، پیاز رنده‌شده، نمک، فلفل سیاه، برنج ایرانی، زعفران، کره</p>
+              <div class="food-card-footer">
+                <span class="food-price">۱۸۵,۰۰۰ تومان</span>
+                <span class="food-tag">غذای ایرانی</span>
+              </div>
+            </div>
+          </article>
+          <article class="food-card">
+            <div class="food-card-img">
+              <img src="jooje.jpg" alt="جوجه کباب" loading="lazy">
+            </div>
+            <div class="food-card-body">
+              <h3 class="food-card-name">جوجه کباب</h3>
+              <p class="food-card-ingredients">سینه مرغ، پیاز، آبلیمو، زعفران، رب گوجه‌فرنگی، نمک و فلفل</p>
+              <div class="food-card-footer">
+                <span class="food-price">۱۹۵,۰۰۰ تومان</span>
+                <span class="food-tag">غذای ایرانی</span>
+              </div>
+            </div>
+          </article>
+          <article class="food-card">
+            <div class="food-card-img">
+              <img src="qorme.jpg" alt="قورمه سبزی" loading="lazy">
+            </div>
+            <div class="food-card-body">
+              <h3 class="food-card-name">قورمه سبزی</h3>
+              <p class="food-card-ingredients">سبزی قورمه (جعفری، تره، شنبلیله)، گوشت خورشتی، لوبیا قرمز، لیمو عمانی، پیاز</p>
+              <div class="food-card-footer">
+                <span class="food-price">۱۶۵,۰۰۰ تومان</span>
+                <span class="food-tag">غذای ایرانی</span>
+              </div>
+            </div>
+          </article>
+          <article class="food-card">
+            <div class="food-card-img">
+              <img src="zereshk.jpg" alt="زرشک پلو با مرغ" loading="lazy">
+            </div>
+            <div class="food-card-body">
+              <h3 class="food-card-name">زرشک پلو با مرغ</h3>
+              <p class="food-card-ingredients">برنج ایرانی، زرشک، ران مرغ، زعفران، پیاز، کره</p>
+              <div class="food-card-footer">
+                <span class="food-price">۱۷۵,۰۰۰ تومان</span>
+                <span class="food-tag">غذای ایرانی</span>
+              </div>
+            </div>
+          </article>
+          <article class="food-card">
+            <div class="food-card-img">
+              <img src="fesenjan.jpg" alt="فسنجان" loading="lazy">
+            </div>
+            <div class="food-card-body">
+              <h3 class="food-card-name">فسنجان</h3>
+              <p class="food-card-ingredients">مرغ، گردوی آسیاب‌شده، رب انار، پیاز، شکر، برنج ایرانی</p>
+              <div class="food-card-footer">
+                <span class="food-price">۲۱۰,۰۰۰ تومان</span>
+                <span class="food-tag">غذای ایرانی</span>
+              </div>
+            </div>
+          </article>
+          <article class="food-card">
+            <div class="food-card-img">
+              <img src="baq.jpg" alt="باقالی پلو با ماهیچه" loading="lazy">
+            </div>
+            <div class="food-card-body">
+              <h3 class="food-card-name">باقالی پلو با ماهیچه</h3>
+              <p class="food-card-ingredients">باقالی، شوید، برنج ایرانی، ماهیچه گوسفندی، زعفران، پیاز، سیر</p>
+              <div class="food-card-footer">
+                <span class="food-price">۲۴۰,۰۰۰ تومان</span>
+                <span class="food-tag">غذای ایرانی</span>
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- صفحه فست فود -->
+  <section id="fastfood" class="page">
+    <div class="page-banner" style="background-image:url('fast.jpg')">
+      <div class="container page-banner-inner">
+        <h1>فست‌فود</h1>
+        <p>سریع، داغ و پر از طعم؛ انتخاب امروز شما</p>
+      </div>
+    </div>
+    <div class="section">
+      <div class="container">
+        <div class="food-grid food-grid--3col">
+          <article class="food-card">
+            <div class="food-card-img">
+              <img src="pizza2.jpg" alt="پیتزا مخصوص" loading="lazy">
+            </div>
+            <div class="food-card-body">
+              <h3 class="food-card-name">پیتزا مخصوص</h3>
+              <p class="food-card-ingredients">خمیر پیتزا، سس گوجه، پنیر پیتزا، مرغ و پپرونی، فلفل دلمه‌ای، قارچ، زیتون</p>
+              <div class="food-card-footer">
+                <span class="food-price">۱۶۰,۰۰۰ تومان</span>
+                <span class="food-tag">فست‌فود</span>
+              </div>
+            </div>
+          </article>
+          <article class="food-card">
+            <div class="food-card-img">
+              <img src="ham.jpg" alt="همبرگر" loading="lazy">
+            </div>
+            <div class="food-card-body">
+              <h3 class="food-card-name">همبرگر</h3>
+              <p class="food-card-ingredients">گوشت گوساله چرخ‌کرده، نان برگر، پنیر چدار، کاهو، گوجه، خیارشور، سس مخصوص</p>
+              <div class="food-card-footer">
+                <span class="food-price">۱۱۰,۰۰۰ تومان</span>
+                <span class="food-tag">فست‌فود</span>
+              </div>
+            </div>
+          </article>
+          <article class="food-card">
+            <div class="food-card-img">
+              <img src="sanchik.jpg" alt="ساندویچ مرغ" loading="lazy">
+            </div>
+            <div class="food-card-body">
+              <h3 class="food-card-name">ساندویچ مرغ</h3>
+              <p class="food-card-ingredients">فیله مرغ سوخاری، نان باگت، کاهو، گوجه، سس مایونز، خیارشور</p>
+              <div class="food-card-footer">
+                <span class="food-price">۹۵,۰۰۰ تومان</span>
+                <span class="food-tag">فست‌فود</span>
+              </div>
+            </div>
+          </article>
+          <article class="food-card">
+            <div class="food-card-img">
+              <img src="hotdog.jpeg" alt="هات‌داگ" loading="lazy">
+            </div>
+            <div class="food-card-body">
+              <h3 class="food-card-name">هات‌داگ</h3>
+              <p class="food-card-ingredients">سوسیس، نان هات‌داگ، پیاز، خردل، کچاپ، خیارشور</p>
+              <div class="food-card-footer">
+                <span class="food-price">۸۵,۰۰۰ تومان</span>
+                <span class="food-tag">فست‌فود</span>
+              </div>
+            </div>
+          </article>
+          <article class="food-card">
+            <div class="food-card-img">
+              <img src="fried.jpg" alt="سیب‌زمینی سرخ‌کرده" loading="lazy">
+            </div>
+            <div class="food-card-body">
+              <h3 class="food-card-name">سیب‌زمینی سرخ‌کرده</h3>
+              <p class="food-card-ingredients">سیب‌زمینی، روغن، نمک، ادویه مخصوص</p>
+              <div class="food-card-footer">
+                <span class="food-price">۶۵,۰۰۰ تومان</span>
+                <span class="food-tag">فست‌فود</span>
+              </div>
+            </div>
+          </article>
+          <article class="food-card">
+            <div class="food-card-img">
+              <img src="naget.jpg" alt="ناگت مرغ" loading="lazy">
+            </div>
+            <div class="food-card-body">
+              <h3 class="food-card-name">ناگت مرغ</h3>
+              <p class="food-card-ingredients">سینه مرغ، پانکو، ادویه‌جات، سس گوجه یا باربیکیو</p>
+              <div class="food-card-footer">
+                <span class="food-price">۹۰,۰۰۰ تومان</span>
+                <span class="food-tag">فست‌فود</span>
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- صفحه نوشیدنی -->
+  <section id="drinks" class="page">
+    <div class="page-banner" style="background-image:url('drinks.jpg')">
+      <div class="container page-banner-inner">
+        <h1>نوشیدنی</h1>
+        <p>خنک، تازه و کنار هر غذا دلچسب</p>
+      </div>
+    </div>
+    <div class="section">
+      <div class="container">
+        <div class="food-grid food-grid--3col">
+          <article class="food-card">
+            <div class="food-card-img">
+              <img src="dooq.jpg" alt="دوغ" loading="lazy">
+            </div>
+            <div class="food-card-body">
+              <h3 class="food-card-name">دوغ</h3>
+              <p class="food-card-ingredients">ماست، آب، نعنا خشک، نمک، گاز طبیعی</p>
+              <div class="food-card-footer">
+                <span class="food-price">۳۰,۰۰۰ تومان</span>
+                <span class="food-tag">نوشیدنی</span>
+              </div>
+            </div>
+          </article>
+          <article class="food-card">
+            <div class="food-card-img">
+              <img src="juice.jpg" alt="آب پرتقال طبیعی" loading="lazy">
+            </div>
+            <div class="food-card-body">
+              <h3 class="food-card-name">آب پرتقال طبیعی</h3>
+              <p class="food-card-ingredients">پرتقال تازه، بدون شکر افزوده</p>
+              <div class="food-card-footer">
+                <span class="food-price">۴۵,۰۰۰ تومان</span>
+                <span class="food-tag">نوشیدنی</span>
+              </div>
+            </div>
+          </article>
+          <article class="food-card">
+            <div class="food-card-img">
+              <img src="chai.jpeg" alt="چای سنتی" loading="lazy">
+            </div>
+            <div class="food-card-body">
+              <h3 class="food-card-name">چای سنتی</h3>
+              <p class="food-card-ingredients">چای سیاه، هل، نبات</p>
+              <div class="food-card-footer">
+                <span class="food-price">۲۵,۰۰۰ تومان</span>
+                <span class="food-tag">نوشیدنی</span>
+              </div>
+            </div>
+          </article>
+          <article class="food-card">
+            <div class="food-card-img">
+              <img src="sharbat.jpg" alt="شربت آلبالو" loading="lazy">
+            </div>
+            <div class="food-card-body">
+              <h3 class="food-card-name">شربت آلبالو</h3>
+              <p class="food-card-ingredients">آلبالو، شکر، آب، یخ</p>
+              <div class="food-card-footer">
+                <span class="food-price">۳۵,۰۰۰ تومان</span>
+                <span class="food-tag">نوشیدنی</span>
+              </div>
+            </div>
+          </article>
+          <article class="food-card">
+            <div class="food-card-img">
+              <img src="soda.jpg" alt="نوشابه" loading="lazy">
+            </div>
+            <div class="food-card-body">
+              <h3 class="food-card-name">نوشابه</h3>
+              <p class="food-card-ingredients">نوشابه گازدار (کوکاکولا، فانتا، اسپرایت)</p>
+              <div class="food-card-footer">
+                <span class="food-price">۲۰,۰۰۰ تومان</span>
+                <span class="food-tag">نوشیدنی</span>
+              </div>
+            </div>
+          </article>
+          <article class="food-card">
+            <div class="food-card-img">
+              <img src="Espresso.jpg" alt="قهوه" loading="lazy">
+            </div>
+            <div class="food-card-body">
+              <h3 class="food-card-name">قهوه</h3>
+              <p class="food-card-ingredients">دانه قهوه تازه‌آسیاب، آب، شیر (به دلخواه)</p>
+              <div class="food-card-footer">
+                <span class="food-price">۵۰,۰۰۰ تومان</span>
+                <span class="food-tag">نوشیدنی</span>
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- صفحه مخلفات -->
+  <section id="sides" class="page">
+    <div class="page-banner" style="background-image:url('side.jpg')">
+      <div class="container page-banner-inner">
+        <h1>مخلفات</h1>
+        <p>همراهان کوچکی که غذا را کامل می‌کنند</p>
+      </div>
+    </div>
+    <div class="section">
+      <div class="container">
+        <div class="food-grid food-grid--3col">
+          <article class="food-card">
+            <div class="food-card-img">
+              <img src="shirazi.jpg" alt="سالاد شیرازی" loading="lazy">
+            </div>
+            <div class="food-card-body">
+              <h3 class="food-card-name">سالاد شیرازی</h3>
+              <p class="food-card-ingredients">خیار، گوجه، پیاز، آبلیمو، نعنا خشک، روغن زیتون</p>
+              <div class="food-card-footer">
+                <span class="food-price">۵۵,۰۰۰ تومان</span>
+                <span class="food-tag">مخلفات</span>
+              </div>
+            </div>
+          </article>
+          <article class="food-card">
+            <div class="food-card-img">
+              <img src="maast.jpg" alt="ماست و خیار" loading="lazy">
+            </div>
+            <div class="food-card-body">
+              <h3 class="food-card-name">ماست و خیار</h3>
+              <p class="food-card-ingredients">ماست، خیار، نعنا خشک، گردو، سیر</p>
+              <div class="food-card-footer">
+                <span class="food-price">۴۵,۰۰۰ تومان</span>
+                <span class="food-tag">مخلفات</span>
+              </div>
+            </div>
+          </article>
+          <article class="food-card">
+            <div class="food-card-img">
+              <img src="torshi.jpg" alt="ترشی مخلوط" loading="lazy">
+            </div>
+            <div class="food-card-body">
+              <h3 class="food-card-name">ترشی مخلوط</h3>
+              <p class="food-card-ingredients">سبزیجات فصل، سرکه، نمک، ادویه‌جات</p>
+              <div class="food-card-footer">
+                <span class="food-price">۴۰,۰۰۰ تومان</span>
+                <span class="food-tag">مخلفات</span>
+              </div>
+            </div>
+          </article>
+          <article class="food-card">
+            <div class="food-card-img">
+              <img src="zeytoon.jpg" alt="زیتون پرورده" loading="lazy">
+            </div>
+            <div class="food-card-body">
+              <h3 class="food-card-name">زیتون پرورده</h3>
+              <p class="food-card-ingredients">زیتون، گردو، رب انار، سیر، نعنا</p>
+              <div class="food-card-footer">
+                <span class="food-price">۴۸,۰۰۰ تومان</span>
+                <span class="food-tag">مخلفات</span>
+              </div>
+            </div>
+          </article>
+          <article class="food-card">
+            <div class="food-card-img">
+              <img src="nan.jpg" alt="نان بربری" loading="lazy">
+            </div>
+            <div class="food-card-body">
+              <h3 class="food-card-name">نان بربری</h3>
+              <p class="food-card-ingredients">آرد گندم، خمیرمایه، کنجد، سیاه‌دانه</p>
+              <div class="food-card-footer">
+                <span class="food-price">۱۵,۰۰۰ تومان</span>
+                <span class="food-tag">مخلفات</span>
+              </div>
+            </div>
+          </article>
+          <article class="food-card">
+            <div class="food-card-img">
+              <img src="kashk.jpg" alt="کشک بادمجان" loading="lazy">
+            </div>
+            <div class="food-card-body">
+              <h3 class="food-card-name">کشک بادمجان</h3>
+              <p class="food-card-ingredients">بادمجان، کشک، پیاز داغ، نعنا داغ، گردو</p>
+              <div class="food-card-footer">
+                <span class="food-price">۷۰,۰۰۰ تومان</span>
+                <span class="food-tag">مخلفات</span>
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="container footer-grid">
+    <div class="footer-brand">
+      <h2>کافه لویال</h2>
+      <p>طعم اصیل ایرانی و فست‌فود امروزی، در کنار هم. کافه لویال میزبان شماست.</p>
+      <div class="social-icons">
+        <a href="#" aria-label="اینستاگرام کافه لویال">
+          <svg viewBox="0 0 24 24"><path d="M12 2.2c3.2 0 3.6 0 4.9.07 1.2.06 2.1.26 2.6.44.6.24 1.1.55 1.6 1.04.5.5.8 1 1.04 1.6.18.5.38 1.4.44 2.6.07 1.3.07 1.7.07 4.9s0 3.6-.07 4.9c-.06 1.2-.26 2.1-.44 2.6-.24.6-.55 1.1-1.04 1.6-.5.5-1 .8-1.6 1.04-.5.18-1.4.38-2.6.44-1.3.07-1.7.07-4.9.07s-3.6 0-4.9-.07c-1.2-.06-2.1-.26-2.6-.44-.6-.24-1.1-.55-1.6-1.04-.5-.5-.8-1-1.04-1.6-.18-.5-.38-1.4-.44-2.6C2.2 15.6 2.2 15.2 2.2 12s0-3.6.07-4.9c.06-1.2.26-2.1.44-2.6.24-.6.55-1.1 1.04-1.6.5-.5 1-.8 1.6-1.04.5-.18 1.4-.38 2.6-.44C8.4 2.2 8.8 2.2 12 2.2zm0 3.05a6.75 6.75 0 100 13.5 6.75 6.75 0 000-13.5zm0 11.13a4.38 4.38 0 110-8.76 4.38 4.38 0 010 8.76zm7.02-11.4a1.58 1.58 0 11-3.15 0 1.58 1.58 0 013.15 0z"/></svg>
+        </a>
+        <a href="#" aria-label="تلگرام کافه لویال">
+          <svg viewBox="0 0 24 24"><path d="M21.9 4.6c.2-1-.6-1.7-1.5-1.3L2.6 10.5c-.9.4-.9 1.6.1 1.9l4.4 1.4 1.7 5.3c.2.6 1 .7 1.4.2l2.3-2.6 4.4 3.3c.7.5 1.7.1 1.9-.7l3.1-14.7zM8.7 13.2l9.4-6c.3-.2.6.2.3.4l-7.7 7.3c-.3.3-.5.7-.5 1.1l-.2 2.5-1.3-5.3z"/></svg>
+        </a>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h4>دسترسی سریع</h4>
+      <ul>
+        <li><a href="#" onclick="showPage('home')">خانه</a></li>
+        <li><a href="#" onclick="showPage('iranian')">غذای ایرانی</a></li>
+        <li><a href="#" onclick="showPage('fastfood')">فست‌فود</a></li>
+        <li><a href="#" onclick="showPage('drinks')">نوشیدنی</a></li>
+        <li><a href="#" onclick="showPage('sides')">مخلفات</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>اطلاعات تماس</h4>
+      <p>آدرس: تهران، خیابان ولیعصر، نرسیده به میدان ونک</p>
+      <p>تلفن: ۰۲۱-۱۲۳۴۵۶۷۸</p>
+      <p>ساعت کاری: هر روز ۱۲ تا ۲۴</p>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© تمامی حقوق برای کافه لویال محفوظ است.</p>
+  </div>
+</footer>
+
+<script>
+// ==========================================
+// مدیریت منوی موبایل (Hamburger Menu)
+// ==========================================
+document.addEventListener('DOMContentLoaded', function () {
+  var toggle = document.getElementById('nav-toggle');
+  var nav = document.getElementById('main-nav');
+
+  if (toggle && nav) {
+    toggle.addEventListener('click', function () {
+      var isOpen = nav.classList.toggle('open');
+      toggle.classList.toggle('open', isOpen);
+      toggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+    });
+
+    nav.querySelectorAll('a').forEach(function (link) {
+      link.addEventListener('click', function () {
+        nav.classList.remove('open');
+        toggle.classList.remove('open');
+        toggle.setAttribute('aria-expanded', 'false');
+      });
+    });
+  }
+});
+
+// ==========================================
+// افکت Spotlight: آیتم وسط بزرگ‌تر، اطراف کوچک‌تر و محو (نسخه نهایی)
+// ==========================================
+document.addEventListener('DOMContentLoaded', function () {
+    var scrollItems = document.querySelectorAll('.food-card, .section-head, .category-tile');
+
+    function updateScrollEffect() {
+        var viewportHeight = window.innerHeight;
+        var viewportCenter = viewportHeight / 2;
+
+        var range = 0.9; 
+
+        scrollItems.forEach(function (item) {
+            var rect = item.getBoundingClientRect();
+            var itemCenter = rect.top + rect.height / 2;
+            
+            var distance = Math.abs(itemCenter - viewportCenter) / viewportCenter;
+            
+            var normalizedDistance = Math.min(distance / range, 1);
+
+            var scale = 1 - (normalizedDistance * 0.15); 
+            var opacity = 1 - (normalizedDistance * 0.3); 
+
+            item.style.transform = 'scale(' + scale + ')';
+            item.style.opacity = opacity;
+        });
+    }
+
+    updateScrollEffect();
+
+    var ticking = false;
+    window.addEventListener('scroll', function () {
+        if (!ticking) {
+            window.requestAnimationFrame(function () {
+                updateScrollEffect();
+                ticking = false;
+            });
+            ticking = true;
+        }
+    });
+    
+    window.addEventListener('resize', updateScrollEffect);
+});
+
+// ==========================================
+// تابع نمایش صفحات (مخصوص نسخه تک فایل)
+// ==========================================
+function showPage(pageId) {
+    var pages = document.querySelectorAll('.page');
+    pages.forEach(function(page) {
+        page.classList.remove('active');
+        page.style.display = 'none';
+    });
+    
+    var target = document.getElementById(pageId);
+    if (target) {
+        target.classList.add('active');
+        target.style.display = 'block';
+    }
+
+    var navLinks = document.querySelectorAll('.main-nav a');
+    navLinks.forEach(function(link) {
+        link.classList.remove('active');
+        if (link.getAttribute('onclick').includes(pageId)) {
+            link.classList.add('active');
+        }
+    });
+
+    window.scrollTo(0, 0);
+}
+
+// نمایش صفحه اول هنگام لود
+document.addEventListener('DOMContentLoaded', function() {
+    var home = document.getElementById('home');
+    if (home) {
+        home.style.display = 'block';
+    }
+    var others = document.querySelectorAll('.page:not(#home)');
+    others.forEach(function(p) {
+        p.style.display = 'none';
+    });
+});
+</script>
+</body>
+</html>
