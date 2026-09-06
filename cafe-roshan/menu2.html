@@ -1,0 +1,1500 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>کافه روشن | منو و سفارش آنلاین</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Lalezar&family=Vazirmatn:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+    <style>
+        /* ============================================================
+           کافه روشن — طراحی نوین «روشنایی و شفافیت»
+           پالت: سفید، طلایی روشن، سبز ملایم، خاکستری‌آبی
+           حس: باز، مدرن، روشن، انرژی‌بخش
+           ساختار: کارت‌های افقی (تصویر چپ، متن راست) و تایل‌های بزرگ
+           ============================================================ */
+
+        :root {
+            --color-bg: #F8F9FA;
+            --color-surface: #FFFFFF;
+            --color-surface-soft: #F1F3F5;
+            --color-primary: #2C7A5A;
+            --color-primary-light: #4A9E7A;
+            --color-gold: #D4A34E;
+            --color-gold-light: #EBCB8B;
+            --color-ink: #1E2B2A;
+            --color-ink-soft: #5A6B6A;
+            --color-accent: #E8825A;
+            --color-border: #E2E6E9;
+            --shadow-soft: 0 8px 24px rgba(30, 43, 42, 0.06);
+            --shadow-hover: 0 16px 40px rgba(30, 43, 42, 0.12);
+            --radius-card: 20px;
+            --radius-sm: 8px;
+            --font-display: 'Lalezar', 'Vazirmatn', sans-serif;
+            --font-body: 'Vazirmatn', system-ui, sans-serif;
+            --transition: 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+        }
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        html {
+            scroll-behavior: smooth;
+        }
+        img {
+            max-width: 100%;
+            display: block;
+        }
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+        ul {
+            list-style: none;
+        }
+        button {
+            font: inherit;
+            cursor: pointer;
+            border: none;
+            background: none;
+            color: inherit;
+        }
+
+        body {
+            direction: rtl;
+            font-family: var(--font-body);
+            font-weight: 400;
+            color: var(--color-ink);
+            background: var(--color-bg);
+            line-height: 1.7;
+            font-size: 16px;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin-inline: auto;
+            padding-inline: 28px;
+        }
+
+        :focus-visible {
+            outline: 3px solid var(--color-gold);
+            outline-offset: 4px;
+            border-radius: 4px;
+        }
+
+        .skip-link {
+            position: absolute;
+            right: 20px;
+            top: -80px;
+            background: var(--color-primary);
+            color: #fff;
+            padding: 12px 24px;
+            border-radius: var(--radius-sm);
+            transition: top 0.25s ease;
+            z-index: 200;
+            font-weight: 600;
+        }
+        .skip-link:focus {
+            top: 20px;
+        }
+
+        /* ---------- HEADER — مینیمال با خط زیرین ---------- */
+        .site-header {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: rgba(255, 255, 255, 0.88);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border-bottom: 1px solid var(--color-border);
+        }
+
+        .header-inner {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 24px;
+            padding-block: 14px;
+        }
+
+        .logo {
+            font-family: var(--font-display);
+            font-size: 1.8rem;
+            color: var(--color-primary);
+            letter-spacing: 0.5px;
+            flex-shrink: 0;
+            transition: color var(--transition);
+        }
+        .logo:hover {
+            color: var(--color-gold);
+        }
+        .logo span {
+            color: var(--color-gold);
+        }
+
+        .main-nav {
+            display: flex;
+            align-items: center;
+            gap: 28px;
+        }
+        .main-nav a {
+            font-weight: 600;
+            font-size: 0.95rem;
+            color: var(--color-ink-soft);
+            padding-block: 6px;
+            position: relative;
+            transition: color var(--transition);
+        }
+        .main-nav a::after {
+            content: '';
+            position: absolute;
+            right: 0;
+            bottom: -2px;
+            height: 2.5px;
+            width: 0;
+            background: var(--color-gold);
+            border-radius: 4px;
+            transition: width var(--transition);
+        }
+        .main-nav a:hover,
+        .main-nav a.active {
+            color: var(--color-primary);
+        }
+        .main-nav a:hover::after,
+        .main-nav a.active::after {
+            width: 100%;
+        }
+
+        .nav-toggle {
+            display: none;
+            flex-direction: column;
+            justify-content: center;
+            gap: 5px;
+            width: 44px;
+            height: 44px;
+            padding: 10px;
+            border-radius: var(--radius-sm);
+            background: var(--color-surface-soft);
+            transition: background var(--transition);
+        }
+        .nav-toggle:hover {
+            background: var(--color-border);
+        }
+        .nav-toggle span {
+            display: block;
+            height: 2.5px;
+            width: 100%;
+            background: var(--color-ink);
+            border-radius: 4px;
+            transition: transform var(--transition), opacity var(--transition);
+        }
+        .nav-toggle.open span:nth-child(1) {
+            transform: translateY(7px) rotate(45deg);
+        }
+        .nav-toggle.open span:nth-child(2) {
+            opacity: 0;
+        }
+        .nav-toggle.open span:nth-child(3) {
+            transform: translateY(-7px) rotate(-45deg);
+        }
+
+        /* ---------- BUTTONS ---------- */
+        .btn-primary {
+            display: inline-block;
+            background: var(--color-primary);
+            color: #fff;
+            font-weight: 700;
+            padding: 16px 40px;
+            border-radius: 60px;
+            transition: background var(--transition), transform var(--transition), box-shadow var(--transition);
+            box-shadow: 0 4px 16px rgba(44, 122, 90, 0.25);
+        }
+        .btn-primary:hover {
+            background: var(--color-primary-light);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 28px rgba(44, 122, 90, 0.32);
+        }
+
+        .btn-outline-light {
+            display: inline-block;
+            background: transparent;
+            color: #fff;
+            font-weight: 700;
+            padding: 14px 34px;
+            border-radius: 60px;
+            border: 2px solid rgba(255, 255, 255, 0.6);
+            transition: background var(--transition), color var(--transition), border-color var(--transition);
+        }
+        .btn-outline-light:hover {
+            background: rgba(255, 255, 255, 0.15);
+            border-color: #fff;
+        }
+
+        /* ---------- HERO — تمام‌عرض با تصویر و متن روی آن ---------- */
+        .hero {
+            position: relative;
+            min-height: 80vh;
+            display: flex;
+            align-items: center;
+            background: linear-gradient(135deg, #1E3B2F, #2C7A5A);
+            overflow: hidden;
+            isolation: isolate;
+        }
+        .hero::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle at 80% 20%, rgba(212, 163, 78, 0.20), transparent 50%),
+                radial-gradient(circle at 20% 80%, rgba(232, 130, 90, 0.12), transparent 45%);
+            z-index: 0;
+            pointer-events: none;
+        }
+        .hero-bg-img {
+            position: absolute;
+            inset: 0;
+            z-index: 0;
+            opacity: 0.25;
+            background-image: url('Pizza.jpg');
+            background-size: cover;
+            background-position: center;
+            filter: blur(2px) brightness(0.7);
+        }
+        .hero-inner {
+            position: relative;
+            z-index: 1;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 50px;
+            padding-block: 60px 40px;
+            width: 100%;
+        }
+        .hero-text {
+            flex: 1 1 480px;
+            color: #fff;
+        }
+        .hero-text>* {
+            animation: fadeUp 0.7s ease both;
+        }
+        .hero-text>*:nth-child(2) {
+            animation-delay: 0.08s;
+        }
+        .hero-text>*:nth-child(3) {
+            animation-delay: 0.16s;
+        }
+        .hero-text>*:nth-child(4) {
+            animation-delay: 0.24s;
+        }
+
+        .hero-kicker {
+            font-weight: 600;
+            font-size: 0.95rem;
+            letter-spacing: 0.5px;
+            color: var(--color-gold-light);
+            margin-bottom: 12px;
+        }
+        .hero-kicker::before {
+            content: '✦ ';
+        }
+
+        .hero-title {
+            font-family: var(--font-display);
+            font-size: clamp(2.8rem, 6vw, 4.6rem);
+            line-height: 1.15;
+            margin-bottom: 20px;
+        }
+        .hero-title em {
+            color: var(--color-gold-light);
+            font-style: normal;
+        }
+
+        .hero-desc {
+            color: rgba(255, 255, 255, 0.85);
+            max-width: 44ch;
+            margin-bottom: 32px;
+            font-size: 1.08rem;
+        }
+
+        .hero-media {
+            flex: 1 1 400px;
+            position: relative;
+            display: none;
+            /* در موبایل مخفی، در دسکتاپ نمایش */;
+        }
+        .hero-media img {
+            width: 100%;
+            height: auto;
+            border-radius: var(--radius-card);
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.25);
+            border: 2px solid rgba(255, 255, 255, 0.15);
+        }
+
+        @keyframes fadeUp {
+            from {
+                opacity: 0;
+                transform: translateY(28px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* ---------- SECTIONS ---------- */
+        .section {
+            padding-block: 72px;
+        }
+        .section-alt {
+            background: var(--color-surface-soft);
+        }
+        .section-light {
+            background: var(--color-surface);
+        }
+
+        .section-head {
+            text-align: center;
+            max-width: 660px;
+            margin: 0 auto 48px;
+        }
+        .section-head .badge {
+            display: inline-block;
+            background: rgba(212, 163, 78, 0.12);
+            color: var(--color-gold);
+            font-weight: 700;
+            font-size: 0.75rem;
+            padding: 4px 20px;
+            border-radius: 40px;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+            margin-bottom: 8px;
+        }
+        .section-title {
+            font-family: var(--font-display);
+            font-size: clamp(1.8rem, 3.2vw, 2.6rem);
+            color: var(--color-primary);
+            line-height: 1.25;
+        }
+        .section-desc {
+            color: var(--color-ink-soft);
+            margin-top: 10px;
+            font-size: 1.02rem;
+        }
+
+        /* ---------- FOOD LIST — چیدمان افقی (تصویر چپ، متن راست) ---------- */
+        .food-list {
+            display: flex;
+            flex-direction: column;
+            gap: 28px;
+        }
+
+        .food-item {
+            display: flex;
+            align-items: stretch;
+            background: var(--color-surface);
+            border-radius: var(--radius-card);
+            overflow: hidden;
+            box-shadow: var(--shadow-soft);
+            border: 1px solid var(--color-border);
+            transition: transform var(--transition), box-shadow var(--transition);
+        }
+        .food-item:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .food-item-img {
+            flex: 0 0 200px;
+            min-height: 180px;
+            background: var(--color-surface-soft);
+            overflow: hidden;
+        }
+        .food-item-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        .food-item:hover .food-item-img img {
+            transform: scale(1.04);
+        }
+
+        .food-item-body {
+            flex: 1;
+            padding: 20px 24px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        .food-item-name {
+            font-weight: 700;
+            font-size: 1.2rem;
+            color: var(--color-primary);
+            margin-bottom: 4px;
+        }
+        .food-item-ingredients {
+            font-size: 0.9rem;
+            color: var(--color-ink-soft);
+            line-height: 1.6;
+            margin-bottom: 12px;
+        }
+        .food-item-footer {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            padding-top: 10px;
+            border-top: 1px solid var(--color-border);
+        }
+        .food-item-price {
+            font-weight: 800;
+            color: var(--color-accent);
+            font-size: 1.05rem;
+        }
+        .food-item-tag {
+            font-size: 0.72rem;
+            font-weight: 600;
+            color: var(--color-primary-light);
+            background: rgba(44, 122, 90, 0.07);
+            padding: 4px 14px;
+            border-radius: 40px;
+            border: 1px solid rgba(44, 122, 90, 0.10);
+        }
+
+        /* ---------- CATEGORY TILES — با طرحی متفاوت (مورب و بزرگ) ---------- */
+        .category-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 28px;
+        }
+
+        .category-tile {
+            position: relative;
+            display: block;
+            border-radius: var(--radius-card);
+            overflow: hidden;
+            aspect-ratio: 16 / 9;
+            isolation: isolate;
+            box-shadow: var(--shadow-soft);
+            transition: transform var(--transition), box-shadow var(--transition);
+        }
+        .category-tile:hover {
+            transform: translateY(-6px) scale(1.01);
+            box-shadow: var(--shadow-hover);
+        }
+        .category-tile img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s ease;
+        }
+        .category-tile::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, rgba(30, 43, 42, 0.65), rgba(30, 43, 42, 0.20) 60%);
+            z-index: 1;
+        }
+        .category-tile:hover img {
+            transform: scale(1.08);
+        }
+
+        .category-tile-label {
+            position: absolute;
+            inset-inline: 0;
+            bottom: 0;
+            z-index: 2;
+            padding: 24px 28px;
+            display: flex;
+            align-items: flex-end;
+            justify-content: space-between;
+            gap: 16px;
+        }
+        .category-tile-label h3 {
+            font-family: var(--font-display);
+            color: #fff;
+            font-size: 1.6rem;
+            text-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+        }
+        .category-tile-label span {
+            color: var(--color-gold-light);
+            font-weight: 600;
+            font-size: 0.85rem;
+            background: rgba(0, 0, 0, 0.30);
+            backdrop-filter: blur(4px);
+            padding: 6px 18px;
+            border-radius: 40px;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            transition: background var(--transition);
+        }
+        .category-tile:hover .category-tile-label span {
+            background: rgba(212, 163, 78, 0.35);
+            border-color: var(--color-gold);
+        }
+
+        /* ---------- PAGE BANNER — با خطوط مورب ---------- */
+        .page-banner {
+            position: relative;
+            padding-block: 72px;
+            background-size: cover;
+            background-position: center;
+            color: #fff;
+            isolation: isolate;
+            overflow: hidden;
+        }
+        .page-banner::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, rgba(30, 43, 42, 0.80), rgba(44, 122, 90, 0.70));
+            z-index: 0;
+        }
+        .page-banner::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: repeating-linear-gradient(45deg, transparent, transparent 30px, rgba(255, 255, 255, 0.03) 30px, rgba(255, 255, 255, 0.03) 31px);
+            z-index: 0;
+            pointer-events: none;
+        }
+        .page-banner-inner {
+            position: relative;
+            z-index: 1;
+            text-align: center;
+        }
+        .page-banner h1 {
+            font-family: var(--font-display);
+            font-size: clamp(2.2rem, 4.4vw, 3.4rem);
+            text-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+        }
+        .page-banner h1::before {
+            content: '☀ ';
+            color: var(--color-gold-light);
+        }
+        .page-banner p {
+            margin-top: 10px;
+            color: rgba(255, 255, 255, 0.90);
+            font-size: 1.05rem;
+        }
+
+        /* ---------- FOOTER — روشن و مدرن ---------- */
+        .site-footer {
+            background: var(--color-surface);
+            border-top: 1px solid var(--color-border);
+            padding-block: 48px 24px;
+        }
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 1.3fr 1fr 1fr;
+            gap: 44px;
+        }
+        .footer-brand h2 {
+            font-family: var(--font-display);
+            color: var(--color-primary);
+            font-size: 1.7rem;
+            margin-bottom: 8px;
+        }
+        .footer-brand h2 span {
+            color: var(--color-gold);
+        }
+        .footer-brand p {
+            max-width: 34ch;
+            font-size: 0.94rem;
+            color: var(--color-ink-soft);
+        }
+
+        .footer-col h4 {
+            color: var(--color-ink);
+            font-weight: 700;
+            margin-bottom: 16px;
+            font-size: 1rem;
+        }
+        .footer-col ul li {
+            margin-bottom: 10px;
+            font-size: 0.94rem;
+        }
+        .footer-col ul a {
+            color: var(--color-ink-soft);
+            transition: color var(--transition);
+        }
+        .footer-col ul a:hover {
+            color: var(--color-primary);
+        }
+        .footer-col p {
+            font-size: 0.94rem;
+            margin-bottom: 8px;
+            color: var(--color-ink-soft);
+            line-height: 1.7;
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 12px;
+            margin-top: 16px;
+        }
+        .social-icons a {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: var(--color-surface-soft);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background var(--transition), transform var(--transition);
+            border: 1px solid var(--color-border);
+        }
+        .social-icons a:hover {
+            background: var(--color-primary);
+            transform: translateY(-3px);
+            border-color: var(--color-primary);
+        }
+        .social-icons a:hover svg {
+            fill: #fff;
+        }
+        .social-icons svg {
+            width: 18px;
+            height: 18px;
+            fill: var(--color-ink-soft);
+            transition: fill var(--transition);
+        }
+
+        .footer-bottom {
+            border-top: 1px solid var(--color-border);
+            margin-top: 36px;
+            padding-top: 20px;
+            text-align: center;
+            font-size: 0.85rem;
+            color: var(--color-ink-soft);
+        }
+
+        /* ---------- PAGE VISIBILITY ---------- */
+        .page {
+            display: none;
+        }
+        .page.active {
+            display: block;
+        }
+
+        /* ---------- RESPONSIVE ---------- */
+        @media (min-width: 992px) {
+            .hero-media {
+                display: block;
+            }
+        }
+
+        @media (max-width: 1024px) {
+            .food-item-img {
+                flex: 0 0 160px;
+                min-height: 150px;
+            }
+        }
+
+        @media (max-width: 820px) {
+            .footer-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+            .footer-brand {
+                grid-column: 1 / -1;
+            }
+            .category-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        @media (max-width: 720px) {
+            .nav-toggle {
+                display: flex;
+            }
+            .main-nav {
+                position: fixed;
+                inset-inline: 0;
+                top: 68px;
+                background: rgba(255, 255, 255, 0.98);
+                backdrop-filter: blur(14px);
+                -webkit-backdrop-filter: blur(14px);
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 2px;
+                padding: 12px 28px 24px;
+                transform: translateY(-10px);
+                opacity: 0;
+                visibility: hidden;
+                transition: opacity var(--transition), transform var(--transition), visibility var(--transition);
+                border-bottom: 1px solid var(--color-border);
+                box-shadow: 0 20px 40px rgba(0, 0, 0, 0.06);
+            }
+            .main-nav.open {
+                transform: translateY(0);
+                opacity: 1;
+                visibility: visible;
+            }
+            .main-nav a {
+                width: 100%;
+                padding-block: 12px;
+                border-bottom: 1px solid var(--color-border);
+            }
+            .main-nav a:last-child {
+                border-bottom: none;
+            }
+
+            .hero-inner {
+                flex-direction: column;
+                padding-block: 40px 28px;
+                gap: 20px;
+            }
+            .hero-text {
+                flex: 1 1 auto;
+                width: 100%;
+            }
+            .hero-media {
+                display: none;
+            }
+            .hero-title {
+                font-size: clamp(2.2rem, 8vw, 3rem);
+            }
+
+            .section {
+                padding-block: 48px;
+            }
+
+            .food-item {
+                flex-direction: column;
+            }
+            .food-item-img {
+                flex: 0 0 auto;
+                min-height: 160px;
+                height: 180px;
+            }
+            .food-item-body {
+                padding: 16px 18px;
+            }
+
+            .category-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            .category-tile {
+                aspect-ratio: 16 / 8;
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr;
+                gap: 28px;
+            }
+            .footer-brand {
+                grid-column: 1;
+            }
+        }
+
+        @media (max-width: 440px) {
+            .container {
+                padding-inline: 16px;
+            }
+            .food-item-img {
+                height: 140px;
+                min-height: 120px;
+            }
+            .food-item-body {
+                padding: 14px 16px;
+            }
+            .food-item-name {
+                font-size: 1.05rem;
+            }
+            .category-tile-label h3 {
+                font-size: 1.3rem;
+            }
+            .category-tile-label {
+                padding: 18px 20px;
+            }
+            .page-banner {
+                padding-block: 48px;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            *,
+            *::before,
+            *::after {
+                animation-duration: 0.001ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.001ms !important;
+                scroll-behavior: auto !important;
+            }
+        }
+
+        /* ---------- SPOTLIGHT EFFECT — نرم و ملایم ---------- */
+        .food-item,
+        .category-tile,
+        .section-head {
+            transition: transform 0.25s ease-out, opacity 0.3s ease-out;
+            will-change: transform, opacity;
+        }
+    </style>
+</head>
+<body>
+
+    <a class="skip-link" href="#main">رفتن به محتوای اصلی</a>
+
+    <header class="site-header">
+        <div class="container header-inner">
+            <a href="#" class="logo" onclick="showPage('home')">کافه <span>روشن</span></a>
+            <nav class="main-nav" id="main-nav">
+                <a href="#" onclick="showPage('home')" class="active">خانه</a>
+                <a href="#" onclick="showPage('iranian')">غذای ایرانی</a>
+                <a href="#" onclick="showPage('fastfood')">فست‌فود</a>
+                <a href="#" onclick="showPage('drinks')">نوشیدنی</a>
+                <a href="#" onclick="showPage('sides')">مخلفات</a>
+            </nav>
+            <button class="nav-toggle" id="nav-toggle" aria-label="باز و بسته کردن منو" aria-expanded="false" aria-controls="main-nav">
+                <span></span><span></span><span></span>
+            </button>
+        </div>
+    </header>
+
+    <main id="main">
+
+        <!-- ===== صفحه خانه ===== -->
+        <section id="home" class="page active">
+            <div class="hero">
+                <div class="hero-bg-img"></div>
+                <div class="container hero-inner">
+                    <div class="hero-text">
+                        <p class="hero-kicker">به کافه روشن خوش آمدید</p>
+                        <h1 class="hero-title">نور و طعم،<br /><em>هم‌نشین لحظه‌های شما</em></h1>
+                        <p class="hero-desc">از چلوکباب سنتی تا فست‌فود مدرن و نوشیدنی‌های خنک؛ در کافه روشن هر لقمه با مواد اولیه‌ی تازه و عشق سرو می‌شود.</p>
+                        <a href="#popular" class="btn-primary">مشاهده منو</a>
+                    </div>
+                    <div class="hero-media">
+                        <img src="Pizza.jpg" alt="نمای کافه" width="600" height="500" loading="eager" />
+                    </div>
+                </div>
+            </div>
+
+            <div class="section section-light" id="popular">
+                <div class="container">
+                    <div class="section-head">
+                        <span class="badge">پرطرفدارها</span>
+                        <h2 class="section-title">غذاهای محبوب</h2>
+                        <p class="section-desc">پرطرفدارترین انتخاب‌های مشتریان کافه روشن</p>
+                    </div>
+
+                    <div class="food-list">
+                        <!-- آیتم‌ها با چیدمان افقی -->
+                        <article class="food-item">
+                            <div class="food-item-img"><img src="Kebab.jpg" alt="چلو کباب کوبیده" loading="lazy" /></div>
+                            <div class="food-item-body">
+                                <h3 class="food-item-name">چلو کباب کوبیده</h3>
+                                <p class="food-item-ingredients">گوشت چرخ‌کرده گوسفندی، پیاز رنده‌شده، برنج ایرانی، زعفران، کره</p>
+                                <div class="food-item-footer">
+                                    <span class="food-item-price">۱۸۵,۰۰۰ تومان</span>
+                                    <span class="food-item-tag">غذای ایرانی</span>
+                                </div>
+                            </div>
+                        </article>
+
+                        <article class="food-item">
+                            <div class="food-item-img"><img src="jooje.jpg" alt="جوجه کباب" loading="lazy" /></div>
+                            <div class="food-item-body">
+                                <h3 class="food-item-name">جوجه کباب</h3>
+                                <p class="food-item-ingredients">سینه مرغ، پیاز، آبلیمو، زعفران، رب گوجه‌فرنگی</p>
+                                <div class="food-item-footer">
+                                    <span class="food-item-price">۱۹۵,۰۰۰ تومان</span>
+                                    <span class="food-item-tag">غذای ایرانی</span>
+                                </div>
+                            </div>
+                        </article>
+
+                        <article class="food-item">
+                            <div class="food-item-img"><img src="fesenjan.jpg" alt="فسنجان" loading="lazy" /></div>
+                            <div class="food-item-body">
+                                <h3 class="food-item-name">فسنجان</h3>
+                                <p class="food-item-ingredients">مرغ، گردوی آسیاب‌شده، رب انار، پیاز، برنج ایرانی</p>
+                                <div class="food-item-footer">
+                                    <span class="food-item-price">۲۱۰,۰۰۰ تومان</span>
+                                    <span class="food-item-tag">غذای ایرانی</span>
+                                </div>
+                            </div>
+                        </article>
+
+                        <article class="food-item">
+                            <div class="food-item-img"><img src="pizza2.jpg" alt="پیتزا مخصوص" loading="lazy" /></div>
+                            <div class="food-item-body">
+                                <h3 class="food-item-name">پیتزا مخصوص</h3>
+                                <p class="food-item-ingredients">خمیر پیتزا، سس گوجه، پنیر پیتزا، مرغ و پپرونی، فلفل دلمه‌ای</p>
+                                <div class="food-item-footer">
+                                    <span class="food-item-price">۱۶۰,۰۰۰ تومان</span>
+                                    <span class="food-item-tag">فست‌فود</span>
+                                </div>
+                            </div>
+                        </article>
+
+                        <article class="food-item">
+                            <div class="food-item-img"><img src="ham.jpg" alt="همبرگر" loading="lazy" /></div>
+                            <div class="food-item-body">
+                                <h3 class="food-item-name">همبرگر</h3>
+                                <p class="food-item-ingredients">گوشت گوساله چرخ‌کرده، نان برگر، پنیر چدار، کاهو، گوجه، سس مخصوص</p>
+                                <div class="food-item-footer">
+                                    <span class="food-item-price">۱۱۰,۰۰۰ تومان</span>
+                                    <span class="food-item-tag">فست‌فود</span>
+                                </div>
+                            </div>
+                        </article>
+
+                        <article class="food-item">
+                            <div class="food-item-img"><img src="dooq.jpg" alt="دوغ" loading="lazy" /></div>
+                            <div class="food-item-body">
+                                <h3 class="food-item-name">دوغ</h3>
+                                <p class="food-item-ingredients">ماست، آب، نعنا خشک، نمک، گاز طبیعی</p>
+                                <div class="food-item-footer">
+                                    <span class="food-item-price">۳۰,۰۰۰ تومان</span>
+                                    <span class="food-item-tag">نوشیدنی</span>
+                                </div>
+                            </div>
+                        </article>
+
+                        <article class="food-item">
+                            <div class="food-item-img"><img src="sharbat.jpg" alt="شربت آلبالو" loading="lazy" /></div>
+                            <div class="food-item-body">
+                                <h3 class="food-item-name">شربت آلبالو</h3>
+                                <p class="food-item-ingredients">آلبالو، شکر، آب، یخ</p>
+                                <div class="food-item-footer">
+                                    <span class="food-item-price">۳۵,۰۰۰ تومان</span>
+                                    <span class="food-item-tag">نوشیدنی</span>
+                                </div>
+                            </div>
+                        </article>
+
+                        <article class="food-item">
+                            <div class="food-item-img"><img src="shirazi.jpg" alt="سالاد شیرازی" loading="lazy" /></div>
+                            <div class="food-item-body">
+                                <h3 class="food-item-name">سالاد شیرازی</h3>
+                                <p class="food-item-ingredients">خیار، گوجه، پیاز، آبلیمو، نعنا خشک، روغن زیتون</p>
+                                <div class="food-item-footer">
+                                    <span class="food-item-price">۵۵,۰۰۰ تومان</span>
+                                    <span class="food-item-tag">مخلفات</span>
+                                </div>
+                            </div>
+                        </article>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section section-alt">
+                <div class="container">
+                    <div class="section-head">
+                        <span class="badge">دسته‌بندی</span>
+                        <h2 class="section-title">منوی کافه روشن</h2>
+                        <p class="section-desc">برای دیدن منوی کامل هر بخش، روی دسته‌ی موردنظر بزنید</p>
+                    </div>
+                    <div class="category-grid">
+                        <a class="category-tile" href="#" onclick="showPage('iranian')">
+                            <img src="Iranian-food.jpg" alt="غذای ایرانی" loading="lazy" />
+                            <div class="category-tile-label">
+                                <h3>غذای ایرانی</h3>
+                                <span>مشاهده منو</span>
+                            </div>
+                        </a>
+                        <a class="category-tile" href="#" onclick="showPage('fastfood')">
+                            <img src="fast.jpg" alt="فست‌فود" loading="lazy" />
+                            <div class="category-tile-label">
+                                <h3>فست‌فود</h3>
+                                <span>مشاهده منو</span>
+                            </div>
+                        </a>
+                        <a class="category-tile" href="#" onclick="showPage('drinks')">
+                            <img src="drinks.jpg" alt="نوشیدنی" loading="lazy" />
+                            <div class="category-tile-label">
+                                <h3>نوشیدنی</h3>
+                                <span>مشاهده منو</span>
+                            </div>
+                        </a>
+                        <a class="category-tile" href="#" onclick="showPage('sides')">
+                            <img src="side.jpg" alt="مخلفات" loading="lazy" />
+                            <div class="category-tile-label">
+                                <h3>مخلفات</h3>
+                                <span>مشاهده منو</span>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== صفحه غذای ایرانی ===== -->
+        <section id="iranian" class="page">
+            <div class="page-banner" style="background-image:url('Iranian-food.jpg')">
+                <div class="container page-banner-inner">
+                    <h1>غذای ایرانی</h1>
+                    <p>طعم اصیل ایران، از دیگ تا بشقاب شما</p>
+                </div>
+            </div>
+            <div class="section section-light">
+                <div class="container">
+                    <div class="food-list">
+                        <article class="food-item">
+                            <div class="food-item-img"><img src="Kebab.jpg" alt="چلو کباب کوبیده" loading="lazy" /></div>
+                            <div class="food-item-body">
+                                <h3 class="food-item-name">چلو کباب کوبیده</h3>
+                                <p class="food-item-ingredients">گوشت چرخ‌کرده گوسفندی، پیاز رنده‌شده، نمک، فلفل سیاه، برنج ایرانی، زعفران، کره</p>
+                                <div class="food-item-footer">
+                                    <span class="food-item-price">۱۸۵,۰۰۰ تومان</span>
+                                    <span class="food-item-tag">غذای ایرانی</span>
+                                </div>
+                            </div>
+                        </article>
+                        <article class="food-item">
+                            <div class="food-item-img"><img src="jooje.jpg" alt="جوجه کباب" loading="lazy" /></div>
+                            <div class="food-item-body">
+                                <h3 class="food-item-name">جوجه کباب</h3>
+                                <p class="food-item-ingredients">سینه مرغ، پیاز، آبلیمو، زعفران، رب گوجه‌فرنگی، نمک و فلفل</p>
+                                <div class="food-item-footer">
+                                    <span class="food-item-price">۱۹۵,۰۰۰ تومان</span>
+                                    <span class="food-item-tag">غذای ایرانی</span>
+                                </div>
+                            </div>
+                        </article>
+                        <article class="food-item">
+                            <div class="food-item-img"><img src="qorme.jpg" alt="قورمه سبزی" loading="lazy" /></div>
+                            <div class="food-item-body">
+                                <h3 class="food-item-name">قورمه سبزی</h3>
+                                <p class="food-item-ingredients">سبزی قورمه (جعفری، تره، شنبلیله)، گوشت خورشتی، لوبیا قرمز، لیمو عمانی، پیاز</p>
+                                <div class="food-item-footer">
+                                    <span class="food-item-price">۱۶۵,۰۰۰ تومان</span>
+                                    <span class="food-item-tag">غذای ایرانی</span>
+                                </div>
+                            </div>
+                        </article>
+                        <article class="food-item">
+                            <div class="food-item-img"><img src="zereshk.jpg" alt="زرشک پلو با مرغ" loading="lazy" /></div>
+                            <div class="food-item-body">
+                                <h3 class="food-item-name">زرشک پلو با مرغ</h3>
+                                <p class="food-item-ingredients">برنج ایرانی، زرشک، ران مرغ، زعفران، پیاز، کره</p>
+                                <div class="food-item-footer">
+                                    <span class="food-item-price">۱۷۵,۰۰۰ تومان</span>
+                                    <span class="food-item-tag">غذای ایرانی</span>
+                                </div>
+                            </div>
+                        </article>
+                        <article class="food-item">
+                            <div class="food-item-img"><img src="fesenjan.jpg" alt="فسنجان" loading="lazy" /></div>
+                            <div class="food-item-body">
+                                <h3 class="food-item-name">فسنجان</h3>
+                                <p class="food-item-ingredients">مرغ، گردوی آسیاب‌شده، رب انار، پیاز، شکر، برنج ایرانی</p>
+                                <div class="food-item-footer">
+                                    <span class="food-item-price">۲۱۰,۰۰۰ تومان</span>
+                                    <span class="food-item-tag">غذای ایرانی</span>
+                                </div>
+                            </div>
+                        </article>
+                        <article class="food-item">
+                            <div class="food-item-img"><img src="baq.jpg" alt="باقالی پلو با ماهیچه" loading="lazy" /></div>
+                            <div class="food-item-body">
+                                <h3 class="food-item-name">باقالی پلو با ماهیچه</h3>
+                                <p class="food-item-ingredients">باقالی، شوید، برنج ایرانی، ماهیچه گوسفندی، زعفران، پیاز، سیر</p>
+                                <div class="food-item-footer">
+                                    <span class="food-item-price">۲۴۰,۰۰۰ تومان</span>
+                                    <span class="food-item-tag">غذای ایرانی</span>
+                                </div>
+                            </div>
+                        </article>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== صفحه فست فود ===== -->
+        <section id="fastfood" class="page">
+            <div class="page-banner" style="background-image:url('fast.jpg')">
+                <div class="container page-banner-inner">
+                    <h1>فست‌فود</h1>
+                    <p>سریع، داغ و پر از طعم؛ انتخاب امروز شما</p>
+                </div>
+            </div>
+            <div class="section section-light">
+                <div class="container">
+                    <div class="food-list">
+                        <article class="food-item">
+                            <div class="food-item-img"><img src="pizza2.jpg" alt="پیتزا مخصوص" loading="lazy" /></div>
+                            <div class="food-item-body">
+                                <h3 class="food-item-name">پیتزا مخصوص</h3>
+                                <p class="food-item-ingredients">خمیر پیتزا، سس گوجه، پنیر پیتزا، مرغ و پپرونی، فلفل دلمه‌ای، قارچ، زیتون</p>
+                                <div class="food-item-footer">
+                                    <span class="food-item-price">۱۶۰,۰۰۰ تومان</span>
+                                    <span class="food-item-tag">فست‌فود</span>
+                                </div>
+                            </div>
+                        </article>
+                        <article class="food-item">
+                            <div class="food-item-img"><img src="ham.jpg" alt="همبرگر" loading="lazy" /></div>
+                            <div class="food-item-body">
+                                <h3 class="food-item-name">همبرگر</h3>
+                                <p class="food-item-ingredients">گوشت گوساله چرخ‌کرده، نان برگر، پنیر چدار، کاهو، گوجه، خیارشور، سس مخصوص</p>
+                                <div class="food-item-footer">
+                                    <span class="food-item-price">۱۱۰,۰۰۰ تومان</span>
+                                    <span class="food-item-tag">فست‌فود</span>
+                                </div>
+                            </div>
+                        </article>
+                        <article class="food-item">
+                            <div class="food-item-img"><img src="sanchik.jpg" alt="ساندویچ مرغ" loading="lazy" /></div>
+                            <div class="food-item-body">
+                                <h3 class="food-item-name">ساندویچ مرغ</h3>
+                                <p class="food-item-ingredients">فیله مرغ سوخاری، نان باگت، کاهو، گوجه، سس مایونز، خیارشور</p>
+                                <div class="food-item-footer">
+                                    <span class="food-item-price">۹۵,۰۰۰ تومان</span>
+                                    <span class="food-item-tag">فست‌فود</span>
+                                </div>
+                            </div>
+                        </article>
+                        <article class="food-item">
+                            <div class="food-item-img"><img src="hotdog.jpeg" alt="هات‌داگ" loading="lazy" /></div>
+                            <div class="food-item-body">
+                                <h3 class="food-item-name">هات‌داگ</h3>
+                                <p class="food-item-ingredients">سوسیس، نان هات‌داگ، پیاز، خردل، کچاپ، خیارشور</p>
+                                <div class="food-item-footer">
+                                    <span class="food-item-price">۸۵,۰۰۰ تومان</span>
+                                    <span class="food-item-tag">فست‌فود</span>
+                                </div>
+                            </div>
+                        </article>
+                        <article class="food-item">
+                            <div class="food-item-img"><img src="fried.jpg" alt="سیب‌زمینی سرخ‌کرده" loading="lazy" /></div>
+                            <div class="food-item-body">
+                                <h3 class="food-item-name">سیب‌زمینی سرخ‌کرده</h3>
+                                <p class="food-item-ingredients">سیب‌زمینی، روغن، نمک، ادویه مخصوص</p>
+                                <div class="food-item-footer">
+                                    <span class="food-item-price">۶۵,۰۰۰ تومان</span>
+                                    <span class="food-item-tag">فست‌فود</span>
+                                </div>
+                            </div>
+                        </article>
+                        <article class="food-item">
+                            <div class="food-item-img"><img src="naget.jpg" alt="ناگت مرغ" loading="lazy" /></div>
+                            <div class="food-item-body">
+                                <h3 class="food-item-name">ناگت مرغ</h3>
+                                <p class="food-item-ingredients">سینه مرغ، پانکو، ادویه‌جات، سس گوجه یا باربیکیو</p>
+                                <div class="food-item-footer">
+                                    <span class="food-item-price">۹۰,۰۰۰ تومان</span>
+                                    <span class="food-item-tag">فست‌فود</span>
+                                </div>
+                            </div>
+                        </article>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== صفحه نوشیدنی ===== -->
+        <section id="drinks" class="page">
+            <div class="page-banner" style="background-image:url('drinks.jpg')">
+                <div class="container page-banner-inner">
+                    <h1>نوشیدنی</h1>
+                    <p>خنک، تازه و کنار هر غذا دلچسب</p>
+                </div>
+            </div>
+            <div class="section section-light">
+                <div class="container">
+                    <div class="food-list">
+                        <article class="food-item">
+                            <div class="food-item-img"><img src="dooq.jpg" alt="دوغ" loading="lazy" /></div>
+                            <div class="food-item-body">
+                                <h3 class="food-item-name">دوغ</h3>
+                                <p class="food-item-ingredients">ماست، آب، نعنا خشک، نمک، گاز طبیعی</p>
+                                <div class="food-item-footer">
+                                    <span class="food-item-price">۳۰,۰۰۰ تومان</span>
+                                    <span class="food-item-tag">نوشیدنی</span>
+                                </div>
+                            </div>
+                        </article>
+                        <article class="food-item">
+                            <div class="food-item-img"><img src="juice.jpg" alt="آب پرتقال طبیعی" loading="lazy" /></div>
+                            <div class="food-item-body">
+                                <h3 class="food-item-name">آب پرتقال طبیعی</h3>
+                                <p class="food-item-ingredients">پرتقال تازه، بدون شکر افزوده</p>
+                                <div class="food-item-footer">
+                                    <span class="food-item-price">۴۵,۰۰۰ تومان</span>
+                                    <span class="food-item-tag">نوشیدنی</span>
+                                </div>
+                            </div>
+                        </article>
+                        <article class="food-item">
+                            <div class="food-item-img"><img src="chai.jpeg" alt="چای سنتی" loading="lazy" /></div>
+                            <div class="food-item-body">
+                                <h3 class="food-item-name">چای سنتی</h3>
+                                <p class="food-item-ingredients">چای سیاه، هل، نبات</p>
+                                <div class="food-item-footer">
+                                    <span class="food-item-price">۲۵,۰۰۰ تومان</span>
+                                    <span class="food-item-tag">نوشیدنی</span>
+                                </div>
+                            </div>
+                        </article>
+                        <article class="food-item">
+                            <div class="food-item-img"><img src="sharbat.jpg" alt="شربت آلبالو" loading="lazy" /></div>
+                            <div class="food-item-body">
+                                <h3 class="food-item-name">شربت آلبالو</h3>
+                                <p class="food-item-ingredients">آلبالو، شکر، آب، یخ</p>
+                                <div class="food-item-footer">
+                                    <span class="food-item-price">۳۵,۰۰۰ تومان</span>
+                                    <span class="food-item-tag">نوشیدنی</span>
+                                </div>
+                            </div>
+                        </article>
+                        <article class="food-item">
+                            <div class="food-item-img"><img src="soda.jpg" alt="نوشابه" loading="lazy" /></div>
+                            <div class="food-item-body">
+                                <h3 class="food-item-name">نوشابه</h3>
+                                <p class="food-item-ingredients">نوشابه گازدار (کوکاکولا، فانتا، اسپرایت)</p>
+                                <div class="food-item-footer">
+                                    <span class="food-item-price">۲۰,۰۰۰ تومان</span>
+                                    <span class="food-item-tag">نوشیدنی</span>
+                                </div>
+                            </div>
+                        </article>
+                        <article class="food-item">
+                            <div class="food-item-img"><img src="Espresso.jpg" alt="قهوه" loading="lazy" /></div>
+                            <div class="food-item-body">
+                                <h3 class="food-item-name">قهوه</h3>
+                                <p class="food-item-ingredients">دانه قهوه تازه‌آسیاب، آب، شیر (به دلخواه)</p>
+                                <div class="food-item-footer">
+                                    <span class="food-item-price">۵۰,۰۰۰ تومان</span>
+                                    <span class="food-item-tag">نوشیدنی</span>
+                                </div>
+                            </div>
+                        </article>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== صفحه مخلفات ===== -->
+        <section id="sides" class="page">
+            <div class="page-banner" style="background-image:url('side.jpg')">
+                <div class="container page-banner-inner">
+                    <h1>مخلفات</h1>
+                    <p>همراهان کوچکی که غذا را کامل می‌کنند</p>
+                </div>
+            </div>
+            <div class="section section-light">
+                <div class="container">
+                    <div class="food-list">
+                        <article class="food-item">
+                            <div class="food-item-img"><img src="shirazi.jpg" alt="سالاد شیرازی" loading="lazy" /></div>
+                            <div class="food-item-body">
+                                <h3 class="food-item-name">سالاد شیرازی</h3>
+                                <p class="food-item-ingredients">خیار، گوجه، پیاز، آبلیمو، نعنا خشک، روغن زیتون</p>
+                                <div class="food-item-footer">
+                                    <span class="food-item-price">۵۵,۰۰۰ تومان</span>
+                                    <span class="food-item-tag">مخلفات</span>
+                                </div>
+                            </div>
+                        </article>
+                        <article class="food-item">
+                            <div class="food-item-img"><img src="maast.jpg" alt="ماست و خیار" loading="lazy" /></div>
+                            <div class="food-item-body">
+                                <h3 class="food-item-name">ماست و خیار</h3>
+                                <p class="food-item-ingredients">ماست، خیار، نعنا خشک، گردو، سیر</p>
+                                <div class="food-item-footer">
+                                    <span class="food-item-price">۴۵,۰۰۰ تومان</span>
+                                    <span class="food-item-tag">مخلفات</span>
+                                </div>
+                            </div>
+                        </article>
+                        <article class="food-item">
+                            <div class="food-item-img"><img src="torshi.jpg" alt="ترشی مخلوط" loading="lazy" /></div>
+                            <div class="food-item-body">
+                                <h3 class="food-item-name">ترشی مخلوط</h3>
+                                <p class="food-item-ingredients">سبزیجات فصل، سرکه، نمک، ادویه‌جات</p>
+                                <div class="food-item-footer">
+                                    <span class="food-item-price">۴۰,۰۰۰ تومان</span>
+                                    <span class="food-item-tag">مخلفات</span>
+                                </div>
+                            </div>
+                        </article>
+                        <article class="food-item">
+                            <div class="food-item-img"><img src="zeytoon.jpg" alt="زیتون پرورده" loading="lazy" /></div>
+                            <div class="food-item-body">
+                                <h3 class="food-item-name">زیتون پرورده</h3>
+                                <p class="food-item-ingredients">زیتون، گردو، رب انار، سیر، نعنا</p>
+                                <div class="food-item-footer">
+                                    <span class="food-item-price">۴۸,۰۰۰ تومان</span>
+                                    <span class="food-item-tag">مخلفات</span>
+                                </div>
+                            </div>
+                        </article>
+                        <article class="food-item">
+                            <div class="food-item-img"><img src="nan.jpg" alt="نان بربری" loading="lazy" /></div>
+                            <div class="food-item-body">
+                                <h3 class="food-item-name">نان بربری</h3>
+                                <p class="food-item-ingredients">آرد گندم، خمیرمایه، کنجد، سیاه‌دانه</p>
+                                <div class="food-item-footer">
+                                    <span class="food-item-price">۱۵,۰۰۰ تومان</span>
+                                    <span class="food-item-tag">مخلفات</span>
+                                </div>
+                            </div>
+                        </article>
+                        <article class="food-item">
+                            <div class="food-item-img"><img src="kashk.jpg" alt="کشک بادمجان" loading="lazy" /></div>
+                            <div class="food-item-body">
+                                <h3 class="food-item-name">کشک بادمجان</h3>
+                                <p class="food-item-ingredients">بادمجان، کشک، پیاز داغ، نعنا داغ، گردو</p>
+                                <div class="food-item-footer">
+                                    <span class="food-item-price">۷۰,۰۰۰ تومان</span>
+                                    <span class="food-item-tag">مخلفات</span>
+                                </div>
+                            </div>
+                        </article>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="site-footer">
+        <div class="container footer-grid">
+            <div class="footer-brand">
+                <h2>کافه <span>روشن</span></h2>
+                <p>نور و طعم، هم‌نشین لحظه‌های شما. با مواد اولیه‌ی تازه و عشق سرو می‌شود.</p>
+                <div class="social-icons">
+                    <a href="#" aria-label="اینستاگرام کافه روشن">
+                        <svg viewBox="0 0 24 24"><path d="M12 2.2c3.2 0 3.6 0 4.9.07 1.2.06 2.1.26 2.6.44.6.24 1.1.55 1.6 1.04.5.5.8 1 1.04 1.6.18.5.38 1.4.44 2.6.07 1.3.07 1.7.07 4.9s0 3.6-.07 4.9c-.06 1.2-.26 2.1-.44 2.6-.24.6-.55 1.1-1.04 1.6-.5.5-1 .8-1.6 1.04-.5.18-1.4.38-2.6.44-1.3.07-1.7.07-4.9.07s-3.6 0-4.9-.07c-1.2-.06-2.1-.26-2.6-.44-.6-.24-1.1-.55-1.6-1.04-.5-.5-.8-1-1.04-1.6-.18-.5-.38-1.4-.44-2.6C2.2 15.6 2.2 15.2 2.2 12s0-3.6.07-4.9c.06-1.2.26-2.1.44-2.6.24-.6.55-1.1 1.04-1.6.5-.5 1-.8 1.6-1.04.5-.18 1.4-.38 2.6-.44C8.4 2.2 8.8 2.2 12 2.2zm0 3.05a6.75 6.75 0 100 13.5 6.75 6.75 0 000-13.5zm0 11.13a4.38 4.38 0 110-8.76 4.38 4.38 0 010 8.76zm7.02-11.4a1.58 1.58 0 11-3.15 0 1.58 1.58 0 013.15 0z"/></svg>
+                    </a>
+                    <a href="#" aria-label="تلگرام کافه روشن">
+                        <svg viewBox="0 0 24 24"><path d="M21.9 4.6c.2-1-.6-1.7-1.5-1.3L2.6 10.5c-.9.4-.9 1.6.1 1.9l4.4 1.4 1.7 5.3c.2.6 1 .7 1.4.2l2.3-2.6 4.4 3.3c.7.5 1.7.1 1.9-.7l3.1-14.7zM8.7 13.2l9.4-6c.3-.2.6.2.3.4l-7.7 7.3c-.3.3-.5.7-.5 1.1l-.2 2.5-1.3-5.3z"/></svg>
+                    </a>
+                </div>
+            </div>
+            <div class="footer-col">
+                <h4>دسترسی سریع</h4>
+                <ul>
+                    <li><a href="#" onclick="showPage('home')">خانه</a></li>
+                    <li><a href="#" onclick="showPage('iranian')">غذای ایرانی</a></li>
+                    <li><a href="#" onclick="showPage('fastfood')">فست‌فود</a></li>
+                    <li><a href="#" onclick="showPage('drinks')">نوشیدنی</a></li>
+                    <li><a href="#" onclick="showPage('sides')">مخلفات</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>اطلاعات تماس</h4>
+                <p>آدرس: تهران، خیابان ولیعصر، نرسیده به میدان ونک</p>
+                <p>تلفن: ۰۲۱-۱۲۳۴۵۶۷۸</p>
+                <p>ساعت کاری: هر روز ۱۲ تا ۲۴</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© تمامی حقوق برای کافه روشن محفوظ است.</p>
+        </div>
+    </footer>
+
+    <script>
+        // ==========================================
+        // مدیریت منوی موبایل
+        // ==========================================
+        document.addEventListener('DOMContentLoaded', function() {
+            var toggle = document.getElementById('nav-toggle');
+            var nav = document.getElementById('main-nav');
+
+            if (toggle && nav) {
+                toggle.addEventListener('click', function() {
+                    var isOpen = nav.classList.toggle('open');
+                    toggle.classList.toggle('open', isOpen);
+                    toggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+                });
+
+                nav.querySelectorAll('a').forEach(function(link) {
+                    link.addEventListener('click', function() {
+                        nav.classList.remove('open');
+                        toggle.classList.remove('open');
+                        toggle.setAttribute('aria-expanded', 'false');
+                    });
+                });
+            }
+        });
+
+        // ==========================================
+        // افکت Spotlight (نرم و ملایم)
+        // ==========================================
+        document.addEventListener('DOMContentLoaded', function() {
+            var scrollItems = document.querySelectorAll('.food-item, .category-tile, .section-head');
+
+            function updateScrollEffect() {
+                var viewportHeight = window.innerHeight;
+                var viewportCenter = viewportHeight / 2;
+                var range = 0.85;
+
+                scrollItems.forEach(function(item) {
+                    var rect = item.getBoundingClientRect();
+                    var itemCenter = rect.top + rect.height / 2;
+                    var distance = Math.abs(itemCenter - viewportCenter) / viewportCenter;
+                    var normalizedDistance = Math.min(distance / range, 1);
+                    var scale = 1 - (normalizedDistance * 0.08);
+                    var opacity = 1 - (normalizedDistance * 0.22);
+
+                    item.style.transform = 'scale(' + scale + ')';
+                    item.style.opacity = opacity;
+                });
+            }
+
+            updateScrollEffect();
+
+            var ticking = false;
+            window.addEventListener('scroll', function() {
+                if (!ticking) {
+                    window.requestAnimationFrame(function() {
+                        updateScrollEffect();
+                        ticking = false;
+                    });
+                    ticking = true;
+                }
+            });
+            window.addEventListener('resize', updateScrollEffect);
+        });
+
+        // ==========================================
+        // تابع نمایش صفحات
+        // ==========================================
+        function showPage(pageId) {
+            var pages = document.querySelectorAll('.page');
+            pages.forEach(function(page) {
+                page.classList.remove('active');
+                page.style.display = 'none';
+            });
+
+            var target = document.getElementById(pageId);
+            if (target) {
+                target.classList.add('active');
+                target.style.display = 'block';
+            }
+
+            var navLinks = document.querySelectorAll('.main-nav a');
+            navLinks.forEach(function(link) {
+                link.classList.remove('active');
+                if (link.getAttribute('onclick') && link.getAttribute('onclick').includes(pageId)) {
+                    link.classList.add('active');
+                }
+            });
+
+            window.scrollTo(0, 0);
+        }
+
+        // نمایش صفحه اول هنگام لود
+        document.addEventListener('DOMContentLoaded', function() {
+            var home = document.getElementById('home');
+            if (home) {
+                home.style.display = 'block';
+            }
+            var others = document.querySelectorAll('.page:not(#home)');
+            others.forEach(function(p) {
+                p.style.display = 'none';
+            });
+        });
+    </script>
+</body>
+</html>

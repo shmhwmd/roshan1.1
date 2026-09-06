@@ -1,0 +1,1628 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>کافه نگاتیو | منو و سفارش آنلاین</title>
+<meta name="description" content="کافه نگاتیو؛ غذای ایرانی، فست‌فود، نوشیدنی و مخلفات تازه با کیفیت رستورانی. مشاهده‌ی کامل منو و سفارش آنلاین.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Ccircle cx='12' cy='12' r='12' fill='%230E6E68'/%3E%3Ccircle cx='12' cy='12' r='4.2' fill='%23F6F2E7'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@100..900&display=swap" rel="stylesheet">
+<style>
+/* ============================================================
+   کافه نگاتیو — Stylesheet
+   هویت بصری: کاشی فیروزه‌ای ایرانی + برنج گرم + انار تیره،
+   روی زمینه‌ای روشن و پرنور. یک خانواده‌ی تایپوگرافی (وزیرمتن)
+   با وزن‌های متفاوت برای ایجاد سلسله‌مراتب.
+   ============================================================ */
+
+:root{
+  --ink: #1B2422;
+  --ink-soft: #5B6764;
+  --paper: #F6F2E7;
+  --paper-alt: #EFE8D4;
+  --card: #FFFFFF;
+
+  --teal: #0E6E68;
+  --teal-deep: #0A2E2C;
+  --brass: #8A5E17;
+  --pomegranate: #9C2B3B;
+  --rust: #9C4A20;
+  --olive: #5B6B34;
+
+  --border: #E3DCC5;
+  --border-on-dark: rgba(246,242,231,.16);
+
+  --font: 'Vazirmatn', system-ui, sans-serif;
+
+  --radius-lg: 28px;
+  --radius-md: 16px;
+  --radius-sm: 10px;
+  --shadow-soft: 0 20px 40px rgba(10,30,28,.10);
+  --shadow-lift: 0 26px 50px rgba(10,30,28,.16);
+  --transition: .25s ease;
+}
+
+/* ---------- reset ---------- */
+*, *::before, *::after{ box-sizing: border-box; }
+*{ margin:0; padding:0; }
+html{ scroll-behavior: smooth; }
+img{ max-width:100%; display:block; }
+a{ text-decoration:none; color:inherit; }
+ul{ list-style:none; }
+button{ font:inherit; cursor:pointer; border:none; background:none; color:inherit; }
+input, textarea{ font:inherit; }
+
+body{
+  direction: rtl;
+  font-family: var(--font);
+  font-weight: 400;
+  color: var(--ink);
+  background: var(--paper);
+  line-height: 1.8;
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
+}
+
+.container{
+  max-width: 1180px;
+  margin-inline: auto;
+  padding-inline: 24px;
+}
+
+:focus-visible{
+  outline: 3px solid var(--teal);
+  outline-offset: 3px;
+}
+
+.skip-link{
+  position:absolute;
+  right:16px; top:-60px;
+  background:var(--teal-deep); color:var(--paper);
+  padding:10px 18px; border-radius:var(--radius-sm);
+  transition: top .2s ease;
+  z-index: 300;
+}
+.skip-link:focus{ top:16px; }
+
+/* ---------- icon utility ---------- */
+.icon{
+  width: 1em; height: 1em;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.6;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  flex-shrink: 0;
+}
+.icon--solid{ fill: currentColor; stroke: none; }
+
+/* ---------- header ---------- */
+.site-header{
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: var(--teal-deep);
+  border-bottom: 1px solid var(--border-on-dark);
+  transition: box-shadow var(--transition);
+}
+.site-header.is-scrolled{
+  box-shadow: 0 12px 30px rgba(0,0,0,.22);
+}
+
+.header-inner{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap: 20px;
+  padding-block: 15px;
+}
+
+.logo{
+  display:flex;
+  align-items:center;
+  gap: 10px;
+  font-size: 1.4rem;
+  font-weight: 800;
+  color: var(--paper);
+  letter-spacing: .2px;
+  flex-shrink: 0;
+}
+.logo .icon{ width:26px; height:26px; color: var(--brass); }
+.logo .logo-accent{ color: #D9A94A; }
+
+.main-nav{
+  display:flex;
+  align-items:center;
+  gap: 8px;
+}
+.main-nav a{
+  font-weight: 600;
+  font-size: .95rem;
+  color: rgba(246,242,231,.78);
+  padding: 9px 16px;
+  border-radius: 999px;
+  transition: color var(--transition), background var(--transition);
+  position: relative;
+}
+.main-nav a:hover{ color: var(--paper); }
+.main-nav a.active{
+  color: var(--teal-deep);
+  background: var(--paper);
+}
+
+.header-actions{
+  display:flex;
+  align-items:center;
+  gap: 14px;
+}
+.header-call{
+  display:flex;
+  align-items:center;
+  gap: 8px;
+  color: rgba(246,242,231,.85);
+  font-size: .88rem;
+  font-weight: 600;
+  white-space: nowrap;
+}
+.header-call .icon{ color: var(--brass); width:18px; height:18px; }
+.header-call:hover{ color: var(--paper); }
+
+.nav-toggle{
+  display:none;
+  flex-direction:column;
+  justify-content:center;
+  gap:5px;
+  width: 40px; height: 40px;
+  padding: 8px;
+  flex-shrink: 0;
+}
+.nav-toggle span{
+  display:block; height:2px; width:100%;
+  background: var(--paper);
+  border-radius: 2px;
+  transition: transform var(--transition), opacity var(--transition);
+}
+.nav-toggle.open span:nth-child(1){ transform: translateY(7px) rotate(45deg); }
+.nav-toggle.open span:nth-child(2){ opacity:0; }
+.nav-toggle.open span:nth-child(3){ transform: translateY(-7px) rotate(-45deg); }
+
+/* ---------- buttons ---------- */
+.btn{
+  display:inline-flex;
+  align-items:center;
+  gap: 8px;
+  font-weight:700;
+  padding: 14px 30px;
+  border-radius: 999px;
+  transition: background var(--transition), transform var(--transition), color var(--transition);
+  font-size: .98rem;
+}
+.btn-primary{
+  background: var(--teal);
+  color: var(--paper);
+}
+.btn-primary:hover{
+  background: #0B5652;
+  transform: translateY(-2px);
+}
+.btn-ghost{
+  border: 1.5px solid var(--border-on-dark);
+  color: var(--paper);
+}
+.btn-ghost:hover{
+  border-color: var(--paper);
+}
+.link-arrow{
+  display:inline-flex;
+  align-items:center;
+  gap: 6px;
+  font-weight: 700;
+  font-size: .92rem;
+  color: var(--teal);
+}
+.link-arrow .icon{ width:16px; height:16px; transition: transform var(--transition); }
+.link-arrow:hover .icon{ transform: translateX(-4px); }
+
+/* ---------- hero ---------- */
+.hero{
+  position: relative;
+  background: var(--teal-deep);
+  overflow: hidden;
+}
+.hero-pattern{
+  position:absolute; inset:0;
+  color: rgba(217,169,74,.14);
+  pointer-events:none;
+}
+.hero-inner{
+  position: relative;
+  z-index: 1;
+  display:flex;
+  align-items:center;
+  gap: 60px;
+  padding-block: 76px 118px;
+}
+.hero-text{ flex: 1 1 460px; }
+.hero-text > *{ animation: fadeUp .7s ease both; }
+.hero-text > *:nth-child(2){ animation-delay:.08s; }
+.hero-text > *:nth-child(3){ animation-delay:.16s; }
+.hero-text > *:nth-child(4){ animation-delay:.24s; }
+
+.hero-kicker{
+  display:inline-flex;
+  align-items:center;
+  gap: 8px;
+  color: #D9A94A;
+  font-weight:700;
+  margin-bottom: 18px;
+  font-size: .92rem;
+  padding: 6px 4px;
+}
+.hero-kicker .rule{ width:28px; height:2px; background:#D9A94A; display:inline-block; }
+.hero-title{
+  font-weight: 800;
+  font-size: clamp(2.3rem, 4.6vw, 3.5rem);
+  line-height: 1.35;
+  letter-spacing: -.01em;
+  color: var(--paper);
+  margin-bottom: 22px;
+  max-width: 14ch;
+}
+.hero-desc{
+  color: rgba(246,242,231,.76);
+  max-width: 46ch;
+  margin-bottom: 34px;
+  font-size: 1.04rem;
+}
+.hero-cta{
+  display:flex;
+  align-items:center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.hero-media{
+  flex: 1 1 420px;
+  position: relative;
+}
+.hero-media::before{
+  content:'';
+  position:absolute;
+  inset: -30px -10px;
+  background: radial-gradient(circle at 32% 24%, rgba(217,169,74,.28), transparent 60%);
+  z-index:0;
+}
+.hero-media-frame{
+  position: relative;
+  z-index:1;
+  aspect-ratio: 4 / 4.4;
+  border-radius: 46% 54% 58% 42% / 48% 42% 58% 52%;
+  overflow: hidden;
+  box-shadow: 0 34px 60px rgba(0,0,0,.4);
+}
+.hero-media-frame img{
+  width:100%; height:100%;
+  object-fit: cover;
+  filter: grayscale(.35) sepia(.22) hue-rotate(140deg) saturate(1.7) brightness(1.03) contrast(1.04);
+}
+.hero-badge{
+  position:absolute;
+  z-index:2;
+  bottom: 6%;
+  left: -6%;
+  background: var(--card);
+  color: var(--ink);
+  border-radius: var(--radius-md);
+  padding: 16px 20px;
+  box-shadow: var(--shadow-lift);
+  display:flex;
+  align-items:center;
+  gap: 12px;
+}
+.hero-badge .icon{ width:26px; height:26px; color:#D9A94A; }
+.hero-badge strong{ display:block; font-size:1.15rem; font-weight:800; }
+.hero-badge span{ display:block; font-size:.78rem; color:var(--ink-soft); }
+
+@keyframes fadeUp{
+  from{ opacity:0; transform: translateY(18px); }
+  to{ opacity:1; transform: translateY(0); }
+}
+
+/* ---------- trust strip ---------- */
+.trust-strip{
+  position: relative;
+  z-index: 2;
+  margin-top: -64px;
+  margin-bottom: 20px;
+}
+.trust-card{
+  background: var(--card);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-lift);
+  display:grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0;
+  overflow: hidden;
+}
+.trust-item{
+  display:flex;
+  align-items:center;
+  gap: 14px;
+  padding: 26px 22px;
+  border-inline-start: 1px solid var(--border);
+}
+.trust-item:first-child{ border-inline-start: none; }
+.trust-item .icon-circle{
+  width: 44px; height:44px;
+  border-radius:50%;
+  background: rgba(14,110,104,.1);
+  color: var(--teal);
+  display:flex; align-items:center; justify-content:center;
+  flex-shrink:0;
+}
+.trust-item .icon-circle .icon{ width:20px; height:20px; }
+.trust-item strong{ display:block; font-size:.92rem; font-weight:700; }
+.trust-item p{ font-size:.8rem; color:var(--ink-soft); margin-top:2px; }
+
+/* ---------- sections ---------- */
+.section{ padding-block: 74px; }
+.section-alt{ background: var(--paper-alt); }
+
+.section-head{
+  max-width: 620px;
+  margin-bottom: 44px;
+}
+.section-head .rule{
+  width: 40px; height: 3px;
+  background: var(--teal);
+  display:block;
+  margin-bottom: 16px;
+  border-radius: 2px;
+}
+.section-title{
+  font-weight: 800;
+  font-size: clamp(1.7rem, 2.8vw, 2.3rem);
+  color: var(--ink);
+}
+.section-desc{
+  color: var(--ink-soft);
+  margin-top: 12px;
+  font-size: 1rem;
+  max-width: 56ch;
+}
+.section-head--between{
+  display:flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+/* ---------- dish cards ---------- */
+.dish-grid{
+  display:grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-auto-rows: 1fr;
+  gap: 24px;
+}
+.dish-grid--3col{
+  grid-template-columns: repeat(3, 1fr);
+}
+.dish-grid--bento .dish:first-child{
+  grid-column: span 2;
+  grid-row: span 2;
+}
+
+.dish{
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  display:flex;
+  flex-direction:column;
+  transition: transform var(--transition), box-shadow var(--transition);
+}
+.dish:hover{
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-soft);
+}
+.dish-photo{
+  aspect-ratio: 4 / 3;
+  overflow:hidden;
+  background: var(--paper-alt);
+}
+.dish-grid--bento .dish:first-child .dish-photo{
+  aspect-ratio: auto;
+  height: 100%;
+  min-height: 220px;
+}
+.dish-photo img{
+  width:100%; height:100%;
+  object-fit: cover;
+  filter: saturate(1.06) contrast(1.03);
+  transition: transform .5s ease;
+}
+.dish:hover .dish-photo img{ transform: scale(1.06); }
+
+.dish-body{ padding: 18px 20px 20px; flex:1; display:flex; flex-direction:column; }
+.dish-name-row{
+  display:flex;
+  align-items:flex-end;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+.dish-name-row .name{
+  font-weight: 700;
+  font-size: 1.06rem;
+  white-space: nowrap;
+}
+.dish-grid--bento .dish:first-child .name{ font-size: 1.28rem; }
+.dish-name-row .leader{
+  flex: 1 1 auto;
+  min-width: 10px;
+  border-bottom: 2px dotted var(--border);
+  transform: translateY(-5px);
+}
+.dish-name-row .price{
+  font-weight: 800;
+  color: var(--brass);
+  font-size: .96rem;
+  white-space: nowrap;
+}
+.dish-ingredients{
+  font-size: .86rem;
+  color: var(--ink-soft);
+  line-height: 1.65;
+  margin-bottom: 16px;
+  flex: 1;
+}
+.dish-ingredients--clamp{
+  display:-webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow:hidden;
+}
+.dish-tag{
+  align-self: flex-start;
+  display:inline-flex;
+  align-items:center;
+  gap: 7px;
+  font-size: .72rem;
+  font-weight:700;
+  color: var(--cat, var(--teal));
+  border: 1px solid var(--cat, var(--teal));
+  padding: 5px 12px;
+  border-radius: 999px;
+}
+.dish-tag i{
+  width:6px; height:6px; border-radius:50%;
+  background: var(--cat, var(--teal));
+  display:inline-block;
+}
+
+/* ---------- category showcase ---------- */
+.category-grid{
+  display:grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 22px;
+}
+.category-card{
+  display:flex;
+  align-items:stretch;
+  gap: 18px;
+  background: var(--card);
+  border-top: 3px solid var(--cat);
+  border-radius: var(--radius-md);
+  padding: 22px;
+  box-shadow: 0 10px 26px rgba(10,30,28,.06);
+  transition: transform var(--transition), box-shadow var(--transition);
+}
+.category-card:hover{
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-soft);
+}
+.category-card-info{
+  flex: 1 1 auto;
+  display:flex;
+  flex-direction:column;
+}
+.category-card .icon-circle{
+  width: 40px; height:40px;
+  border-radius:50%;
+  background: var(--cat);
+  color: #fff;
+  display:flex; align-items:center; justify-content:center;
+  margin-bottom: 14px;
+}
+.category-card .icon-circle .icon{ width:19px; height:19px; }
+.category-card h3{ font-size: 1.15rem; font-weight:800; margin-bottom:6px; }
+.category-card p{ font-size:.88rem; color:var(--ink-soft); margin-bottom:16px; flex:1; }
+.category-card-photo{
+  flex: 0 0 108px;
+  border-radius: var(--radius-sm);
+  overflow:hidden;
+}
+.category-card-photo img{
+  width:100%; height:100%; object-fit:cover;
+  filter: grayscale(.3) sepia(.18) hue-rotate(140deg) saturate(1.5) brightness(1.02);
+}
+
+/* ---------- page banner ---------- */
+.page-banner{
+  position: relative;
+  overflow: hidden;
+  padding-block: 92px 74px;
+  color: #fff;
+}
+.page-banner-bg{
+  position:absolute; inset:0;
+  background-size: cover;
+  background-position: center;
+  filter: grayscale(.5) contrast(1.05) brightness(.85);
+}
+.page-banner::after{
+  content:'';
+  position:absolute; inset:0;
+  background: linear-gradient(155deg, rgba(9,38,36,.94), var(--tint) 150%);
+  mix-blend-mode: multiply;
+}
+.page-banner::before{
+  content:'';
+  position:absolute; inset:0;
+  background: rgba(9,30,28,.28);
+  z-index: 1;
+}
+.page-banner-inner{
+  position:relative; z-index:2;
+}
+.page-banner-icon{
+  display:inline-flex;
+  align-items:center; justify-content:center;
+  width: 54px; height:54px;
+  border-radius: 50%;
+  background: rgba(255,255,255,.14);
+  border: 1px solid rgba(255,255,255,.3);
+  margin-bottom: 18px;
+}
+.page-banner-icon .icon{ width:24px; height:24px; }
+.page-banner h1{
+  font-weight: 800;
+  font-size: clamp(1.9rem, 3.6vw, 2.7rem);
+}
+.page-banner p{
+  margin-top: 12px;
+  color: rgba(255,255,255,.86);
+  font-size: 1.02rem;
+  max-width: 52ch;
+}
+
+/* ---------- footer ---------- */
+.site-footer{
+  background: var(--teal-deep);
+  color: rgba(246,242,231,.78);
+  padding-block: 64px 26px;
+}
+.footer-grid{
+  display:grid;
+  grid-template-columns: 1.3fr 1fr 1fr;
+  gap: 44px;
+}
+.footer-brand .logo{ margin-bottom: 14px; }
+.footer-brand p{
+  max-width: 34ch;
+  font-size: .94rem;
+  color: rgba(246,242,231,.66);
+}
+.footer-col h4{
+  color: var(--paper);
+  font-weight:700;
+  margin-bottom: 18px;
+  font-size: 1.0rem;
+}
+.footer-col ul li{ margin-bottom: 11px; font-size: .93rem; }
+.footer-col a:hover{ color: #D9A94A; }
+.footer-contact-line{
+  display:flex;
+  align-items:flex-start;
+  gap: 10px;
+  font-size:.93rem;
+  margin-bottom:12px;
+  color: rgba(246,242,231,.78);
+}
+.footer-contact-line .icon{ width:16px; height:16px; margin-top:3px; color:#D9A94A; flex-shrink:0; }
+
+.social-icons{
+  display:flex;
+  gap: 10px;
+  margin-top: 20px;
+}
+.social-icons a{
+  width: 38px; height:38px;
+  border-radius:50%;
+  border: 1px solid var(--border-on-dark);
+  display:flex; align-items:center; justify-content:center;
+  transition: background var(--transition), border-color var(--transition);
+}
+.social-icons a:hover{
+  background: var(--teal);
+  border-color: var(--teal);
+}
+.social-icons .icon{ width:17px; height:17px; }
+
+.footer-bottom{
+  border-top: 1px solid var(--border-on-dark);
+  margin-top: 46px;
+  padding-top: 22px;
+  text-align:center;
+  font-size: .85rem;
+  color: rgba(246,242,231,.48);
+}
+
+/* ---------- page visibility / transition ---------- */
+.page{ display:none; }
+.page.active{ display:block; }
+.page.is-entering{
+  animation: pageIn .38s ease both;
+}
+@keyframes pageIn{
+  from{ opacity:0; transform: translateY(10px); }
+  to{ opacity:1; transform: translateY(0); }
+}
+
+/* ---------- responsive ---------- */
+@media (max-width: 980px){
+  .dish-grid{ grid-template-columns: repeat(2, 1fr); }
+  .dish-grid--3col{ grid-template-columns: repeat(2, 1fr); }
+  .dish-grid--bento .dish:first-child{ grid-column: span 2; grid-row: span 1; }
+  .dish-grid--bento .dish:first-child .dish-photo{ aspect-ratio: 4/3; min-height:0; }
+  .dish-grid--bento .dish:first-child .name{ font-size: 1.06rem; }
+  .footer-grid{ grid-template-columns: 1fr 1fr; }
+  .footer-brand{ grid-column: 1 / -1; }
+  .header-call{ display:none; }
+}
+
+@media (max-width: 760px){
+  .nav-toggle{ display:flex; }
+  .main-nav{
+    position:fixed;
+    inset-inline:0;
+    top: 64px;
+    background: var(--teal-deep);
+    flex-direction:column;
+    align-items:stretch;
+    gap: 2px;
+    padding: 12px 20px 24px;
+    transform: translateY(-8px);
+    opacity:0;
+    visibility:hidden;
+    transition: opacity var(--transition), transform var(--transition), visibility var(--transition);
+    border-bottom: 1px solid var(--border-on-dark);
+  }
+  .main-nav.open{
+    transform: translateY(0);
+    opacity:1;
+    visibility:visible;
+  }
+  .main-nav a{ width:100%; padding-block:13px; border-radius: var(--radius-sm); }
+  .main-nav a.active{ background: rgba(246,242,231,.1); color: var(--paper); }
+
+  .hero-inner{ flex-direction: column-reverse; padding-block: 44px 90px; gap: 40px; }
+  .hero-media-frame{ aspect-ratio: 4/3.4; }
+  .hero-badge{ left: 2%; bottom: -8%; padding: 12px 16px; }
+  .hero-text, .hero-media{ flex-basis: auto; width:100%; }
+  .hero-title{ max-width: none; }
+
+  .trust-strip{ margin-top: -34px; }
+  .trust-card{ grid-template-columns: repeat(2, 1fr); }
+  .trust-item{ padding: 18px 16px; }
+  .trust-item:nth-child(2){ border-inline-start: 1px solid var(--border); }
+  .trust-item:nth-child(3){ border-inline-start: none; border-top:1px solid var(--border); }
+  .trust-item:nth-child(4){ border-top:1px solid var(--border); }
+
+  .section{ padding-block: 52px; }
+  .category-grid{ grid-template-columns: 1fr; }
+  .section-head--between{ flex-direction:column; align-items:flex-start; gap:14px; }
+}
+
+@media (max-width: 560px){
+  .dish-grid, .dish-grid--3col{ grid-template-columns: 1fr; }
+  .dish-grid--bento .dish:first-child{ grid-column: span 1; }
+  .footer-grid{ grid-template-columns: 1fr; }
+  .category-card{ flex-direction:column; }
+  .category-card-photo{ flex-basis: auto; height: 140px; width:100%; order:-1; }
+}
+
+@media (prefers-reduced-motion: reduce){
+  *, *::before, *::after{
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+</style>
+</head>
+<body>
+
+<!-- ================= SVG ICON SPRITE ================= -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="i-sun" viewBox="0 0 24 24">
+      <circle cx="12" cy="12" r="4"/>
+      <path d="M12 2.5v3M12 18.5v3M4.6 4.6l2.1 2.1M17.3 17.3l2.1 2.1M2 12h3M19 12h3M4.6 19.4l2.1-2.1M17.3 6.7l2.1-2.1"/>
+    </symbol>
+    <symbol id="i-kabab" viewBox="0 0 24 24">
+      <path d="M3 20.5L20.5 3"/>
+      <rect x="6.4" y="12.4" width="4" height="4" rx="1" transform="rotate(45 8.4 14.4)"/>
+      <rect x="10.4" y="8.4" width="4" height="4" rx="1" transform="rotate(45 12.4 10.4)"/>
+      <rect x="14.4" y="4.4" width="4" height="4" rx="1" transform="rotate(45 16.4 6.4)"/>
+    </symbol>
+    <symbol id="i-burger" viewBox="0 0 24 24">
+      <path d="M4 9.6C4 6.5 7.6 4 12 4s8 2.5 8 5.6"/>
+      <line x1="3" y1="11.2" x2="21" y2="11.2"/>
+      <line x1="3" y1="14.6" x2="21" y2="14.6"/>
+      <path d="M3.6 17.6h16.8a1 1 0 010 2H3.6a1 1 0 010-2z"/>
+    </symbol>
+    <symbol id="i-cup" viewBox="0 0 24 24">
+      <path d="M6.2 3.5h9l-1 12.4a3 3 0 01-3 2.8h-1c-1.6 0-2.9-1.2-3-2.8l-1-12.4z"/>
+      <path d="M9 3.5V1.2M13 3.5V1.2"/>
+      <path d="M7 8.4h8.6"/>
+    </symbol>
+    <symbol id="i-bowl" viewBox="0 0 24 24">
+      <path d="M3 11h18a9 9 0 01-18 0z"/>
+      <line x1="12" y1="3" x2="12" y2="6.2"/>
+      <line x1="8.2" y1="4.2" x2="8.2" y2="6.6"/>
+      <line x1="15.8" y1="4.2" x2="15.8" y2="6.6"/>
+    </symbol>
+    <symbol id="i-leaf" viewBox="0 0 24 24">
+      <path d="M20 4C10 4 4 10 4 18v2h2c8 0 14-6 14-16z"/>
+      <path d="M6.5 17.5C10.5 13.5 14 10 18 6"/>
+    </symbol>
+    <symbol id="i-clock" viewBox="0 0 24 24">
+      <circle cx="12" cy="12" r="9"/>
+      <path d="M12 7.2v5l3.4 2"/>
+    </symbol>
+    <symbol id="i-flame" viewBox="0 0 24 24">
+      <path d="M12 22c-4.4 0-7-2.7-7-6.4 0-3.6 2.2-5.9 3.6-8.8.5 2.2 1.9 3 1.9 3-.4-3 1-5.6 3.6-6.8-.8 2.7.4 4.2 1.9 5.8 1.4 1.5 2 3.1 2 5 0 4-2.6 8.2-6 8.2z"/>
+    </symbol>
+    <symbol id="i-star" viewBox="0 0 24 24">
+      <path d="M12 3l2.6 5.9 6.4.6-4.8 4.3 1.4 6.3L12 17l-5.6 3.1 1.4-6.3-4.8-4.3 6.4-.6z"/>
+    </symbol>
+    <symbol id="i-pin" viewBox="0 0 24 24">
+      <path d="M12 22s7-6.5 7-12a7 7 0 10-14 0c0 5.5 7 12 7 12z"/>
+      <circle cx="12" cy="10" r="2.4"/>
+    </symbol>
+    <symbol id="i-phone" viewBox="0 0 24 24">
+      <path d="M7 3.5c1 0 1.9.6 2.3 1.6l.9 2.1c.3.8.1 1.7-.5 2.3l-1 .9a11 11 0 005.9 5.9l.9-1c.6-.6 1.5-.8 2.3-.5l2.1.9c1 .4 1.6 1.3 1.6 2.3v1.6c0 1.4-1.3 2.5-2.7 2.2C10.9 20.5 4.5 14.1 3.3 6.2 3 4.8 4.1 3.5 5.5 3.5H7z"/>
+    </symbol>
+    <symbol id="i-arrow" viewBox="0 0 24 24">
+      <path d="M17 12H4"/>
+      <path d="M9 6l-5 6 5 6"/>
+    </symbol>
+    <symbol id="i-instagram" viewBox="0 0 24 24">
+      <rect x="3" y="3" width="18" height="18" rx="5.5"/>
+      <circle cx="12" cy="12" r="4"/>
+      <circle cx="17.4" cy="6.6" r=".9" fill="currentColor" stroke="none"/>
+    </symbol>
+    <symbol id="i-telegram" viewBox="0 0 24 24">
+      <path d="M21 4L3 11.5l6 2 2 6 3-4 5 3.5z"/>
+      <path d="M9 13.5l9-7"/>
+    </symbol>
+  </defs>
+</svg>
+
+<a class="skip-link" href="#main">رفتن به محتوای اصلی</a>
+
+<header class="site-header" id="site-header">
+  <div class="container header-inner">
+    <a href="#" class="logo" onclick="showPage('home')">
+      <svg class="icon" aria-hidden="true"><use href="#i-sun"></use></svg>
+      کافه <span class="logo-accent">نگاتیو</span>
+    </a>
+    <nav class="main-nav" id="main-nav">
+      <a href="#" onclick="showPage('home')" class="active">خانه</a>
+      <a href="#" onclick="showPage('iranian')">غذای ایرانی</a>
+      <a href="#" onclick="showPage('fastfood')">فست‌فود</a>
+      <a href="#" onclick="showPage('drinks')">نوشیدنی</a>
+      <a href="#" onclick="showPage('sides')">مخلفات</a>
+    </nav>
+    <div class="header-actions">
+      <a class="header-call" href="tel:02112345678">
+        <svg class="icon" aria-hidden="true"><use href="#i-phone"></use></svg>
+        ۰۲۱-۱۲۳۴۵۶۷۸
+      </a>
+      <button class="nav-toggle" id="nav-toggle" aria-label="باز و بسته کردن منو" aria-expanded="false" aria-controls="main-nav">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+
+  <!-- صفحه خانه -->
+  <section id="home" class="page active">
+    <div class="hero">
+      <div class="hero-pattern" aria-hidden="true">
+        <svg width="100%" height="100%" preserveAspectRatio="xMidYMid slice">
+          <defs>
+            <pattern id="tilePattern" width="64" height="64" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
+              <rect x="16" y="16" width="32" height="32" fill="none" stroke="currentColor" stroke-width="1"/>
+              <circle cx="32" cy="32" r="2.6" fill="currentColor"/>
+            </pattern>
+          </defs>
+          <rect width="100%" height="100%" fill="url(#tilePattern)"/>
+        </svg>
+      </div>
+      <div class="container hero-inner">
+        <div class="hero-text">
+          <p class="hero-kicker"><span class="rule"></span> به کافه نگاتیو خوش آمدید</p>
+          <h1 class="hero-title">سفره‌ای روشن، برای هر لحظه‌ی روز</h1>
+          <p class="hero-desc">از کباب‌های سنتی روی آتش تا پیتزا و برگر امروزی، و نوشیدنی‌های گرم و خنک کنار سفره؛ کافه نگاتیو هر روز با مواد تازه و دستور پخت اصیل برایتان آماده می‌شود.</p>
+          <div class="hero-cta">
+            <a href="#popular" class="btn btn-primary">مشاهده منو</a>
+            <a href="tel:02112345678" class="btn btn-ghost">
+              <svg class="icon" aria-hidden="true"><use href="#i-phone"></use></svg>
+              تماس و سفارش
+            </a>
+          </div>
+        </div>
+        <div class="hero-media">
+          <div class="hero-media-frame">
+            <img src="Pizza.jpg" alt="غذای ویژه‌ی کافه نگاتیو" width="900" height="1000" loading="eager">
+          </div>
+          <div class="hero-badge">
+            <svg class="icon" aria-hidden="true"><use href="#i-star"></use></svg>
+            <div>
+              <strong>۴.۹ از ۵</strong>
+              <span>رضایت مشتریان</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container trust-strip">
+      <div class="trust-card">
+        <div class="trust-item">
+          <span class="icon-circle"><svg class="icon" aria-hidden="true"><use href="#i-leaf"></use></svg></span>
+          <div><strong>مواد اولیه‌ی تازه</strong><p>خرید روزانه از بازار</p></div>
+        </div>
+        <div class="trust-item">
+          <span class="icon-circle"><svg class="icon" aria-hidden="true"><use href="#i-clock"></use></svg></span>
+          <div><strong>آماده در ۲۰ دقیقه</strong><p>سرو سریع و به‌موقع</p></div>
+        </div>
+        <div class="trust-item">
+          <span class="icon-circle"><svg class="icon" aria-hidden="true"><use href="#i-flame"></use></svg></span>
+          <div><strong>طبخ سنتی و خانگی</strong><p>دستور پخت اصیل ایرانی</p></div>
+        </div>
+        <div class="trust-item">
+          <span class="icon-circle"><svg class="icon" aria-hidden="true"><use href="#i-star"></use></svg></span>
+          <div><strong>تجربه‌ای رضایت‌بخش</strong><p>از سفارش تا سرو</p></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section" id="popular">
+      <div class="container">
+        <div class="section-head">
+          <span class="rule"></span>
+          <h2 class="section-title">پرطرفدارترین‌های کافه نگاتیو</h2>
+          <p class="section-desc">انتخاب‌هایی که بیشترین طرفدار را در میان مهمان‌های ما دارند، از همه‌ی بخش‌های منو.</p>
+        </div>
+
+        <div class="dish-grid dish-grid--bento">
+          <article class="dish">
+            <div class="dish-photo">
+              <img src="Kebab.jpg" alt="چلو کباب کوبیده" loading="lazy">
+            </div>
+            <div class="dish-body">
+              <div class="dish-name-row">
+                <span class="name">چلو کباب کوبیده</span>
+                <span class="leader"></span>
+                <span class="price">۱۸۵,۰۰۰ تومان</span>
+              </div>
+              <p class="dish-ingredients dish-ingredients--clamp">گوشت چرخ‌کرده گوسفندی، پیاز رنده‌شده، برنج ایرانی، زعفران، کره</p>
+              <span class="dish-tag" style="--cat:var(--pomegranate)"><i></i>غذای ایرانی</span>
+            </div>
+          </article>
+
+          <article class="dish">
+            <div class="dish-photo">
+              <img src="jooje.jpg" alt="جوجه کباب" loading="lazy">
+            </div>
+            <div class="dish-body">
+              <div class="dish-name-row">
+                <span class="name">جوجه کباب</span>
+                <span class="leader"></span>
+                <span class="price">۱۹۵,۰۰۰ تومان</span>
+              </div>
+              <p class="dish-ingredients dish-ingredients--clamp">سینه مرغ، پیاز، آبلیمو، زعفران، رب گوجه‌فرنگی</p>
+              <span class="dish-tag" style="--cat:var(--pomegranate)"><i></i>غذای ایرانی</span>
+            </div>
+          </article>
+
+          <article class="dish">
+            <div class="dish-photo">
+              <img src="fesenjan.jpg" alt="فسنجان" loading="lazy">
+            </div>
+            <div class="dish-body">
+              <div class="dish-name-row">
+                <span class="name">فسنجان</span>
+                <span class="leader"></span>
+                <span class="price">۲۱۰,۰۰۰ تومان</span>
+              </div>
+              <p class="dish-ingredients dish-ingredients--clamp">مرغ، گردوی آسیاب‌شده، رب انار، پیاز، برنج ایرانی</p>
+              <span class="dish-tag" style="--cat:var(--pomegranate)"><i></i>غذای ایرانی</span>
+            </div>
+          </article>
+
+          <article class="dish">
+            <div class="dish-photo">
+              <img src="pizza2.jpg" alt="پیتزا مخصوص" loading="lazy">
+            </div>
+            <div class="dish-body">
+              <div class="dish-name-row">
+                <span class="name">پیتزا مخصوص</span>
+                <span class="leader"></span>
+                <span class="price">۱۶۰,۰۰۰ تومان</span>
+              </div>
+              <p class="dish-ingredients dish-ingredients--clamp">خمیر پیتزا، سس گوجه، پنیر پیتزا، مرغ و پپرونی، فلفل دلمه‌ای</p>
+              <span class="dish-tag" style="--cat:var(--rust)"><i></i>فست‌فود</span>
+            </div>
+          </article>
+
+          <article class="dish">
+            <div class="dish-photo">
+              <img src="ham.jpg" alt="همبرگر" loading="lazy">
+            </div>
+            <div class="dish-body">
+              <div class="dish-name-row">
+                <span class="name">همبرگر</span>
+                <span class="leader"></span>
+                <span class="price">۱۱۰,۰۰۰ تومان</span>
+              </div>
+              <p class="dish-ingredients dish-ingredients--clamp">گوشت گوساله چرخ‌کرده، نان برگر، پنیر چدار، کاهو، گوجه، سس مخصوص</p>
+              <span class="dish-tag" style="--cat:var(--rust)"><i></i>فست‌فود</span>
+            </div>
+          </article>
+
+          <article class="dish">
+            <div class="dish-photo">
+              <img src="dooq.jpg" alt="دوغ" loading="lazy">
+            </div>
+            <div class="dish-body">
+              <div class="dish-name-row">
+                <span class="name">دوغ</span>
+                <span class="leader"></span>
+                <span class="price">۳۰,۰۰۰ تومان</span>
+              </div>
+              <p class="dish-ingredients dish-ingredients--clamp">ماست، آب، نعنا خشک، نمک، گاز طبیعی</p>
+              <span class="dish-tag" style="--cat:var(--teal)"><i></i>نوشیدنی</span>
+            </div>
+          </article>
+
+          <article class="dish">
+            <div class="dish-photo">
+              <img src="sharbat.jpg" alt="شربت آلبالو" loading="lazy">
+            </div>
+            <div class="dish-body">
+              <div class="dish-name-row">
+                <span class="name">شربت آلبالو</span>
+                <span class="leader"></span>
+                <span class="price">۳۵,۰۰۰ تومان</span>
+              </div>
+              <p class="dish-ingredients dish-ingredients--clamp">آلبالو، شکر، آب، یخ</p>
+              <span class="dish-tag" style="--cat:var(--teal)"><i></i>نوشیدنی</span>
+            </div>
+          </article>
+
+          <article class="dish">
+            <div class="dish-photo">
+              <img src="shirazi.jpg" alt="سالاد شیرازی" loading="lazy">
+            </div>
+            <div class="dish-body">
+              <div class="dish-name-row">
+                <span class="name">سالاد شیرازی</span>
+                <span class="leader"></span>
+                <span class="price">۵۵,۰۰۰ تومان</span>
+              </div>
+              <p class="dish-ingredients dish-ingredients--clamp">خیار، گوجه، پیاز، آبلیمو، نعنا خشک، روغن زیتون</p>
+              <span class="dish-tag" style="--cat:var(--olive)"><i></i>مخلفات</span>
+            </div>
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="section section-alt">
+      <div class="container">
+        <div class="section-head">
+          <span class="rule"></span>
+          <h2 class="section-title">بخش‌های منو</h2>
+          <p class="section-desc">منوی کافه نگاتیو را بر اساس دسته‌ی مورد علاقه‌تان مرور کنید.</p>
+        </div>
+
+        <div class="category-grid">
+          <a class="category-card" href="#" onclick="showPage('iranian')" style="--cat:var(--pomegranate)">
+            <div class="category-card-info">
+              <span class="icon-circle"><svg class="icon" aria-hidden="true"><use href="#i-kabab"></use></svg></span>
+              <h3>غذای ایرانی</h3>
+              <p>کباب‌های سنتی، خورش‌ها و پلوهای خوش‌عطر ایرانی</p>
+              <span class="link-arrow">مشاهده منو <svg class="icon" aria-hidden="true"><use href="#i-arrow"></use></svg></span>
+            </div>
+            <div class="category-card-photo"><img src="Iranian-food.jpg" alt="غذای ایرانی" loading="lazy"></div>
+          </a>
+          <a class="category-card" href="#" onclick="showPage('fastfood')" style="--cat:var(--rust)">
+            <div class="category-card-info">
+              <span class="icon-circle"><svg class="icon" aria-hidden="true"><use href="#i-burger"></use></svg></span>
+              <h3>فست‌فود</h3>
+              <p>پیتزا، برگر و ساندویچ‌های امروزی، داغ و پرحجم</p>
+              <span class="link-arrow">مشاهده منو <svg class="icon" aria-hidden="true"><use href="#i-arrow"></use></svg></span>
+            </div>
+            <div class="category-card-photo"><img src="fast.jpg" alt="فست‌فود" loading="lazy"></div>
+          </a>
+          <a class="category-card" href="#" onclick="showPage('drinks')" style="--cat:var(--teal)">
+            <div class="category-card-info">
+              <span class="icon-circle"><svg class="icon" aria-hidden="true"><use href="#i-cup"></use></svg></span>
+              <h3>نوشیدنی</h3>
+              <p>نوشیدنی‌های گرم و خنک، از دوغ سنتی تا قهوه‌ی تازه</p>
+              <span class="link-arrow">مشاهده منو <svg class="icon" aria-hidden="true"><use href="#i-arrow"></use></svg></span>
+            </div>
+            <div class="category-card-photo"><img src="drinks.jpg" alt="نوشیدنی" loading="lazy"></div>
+          </a>
+          <a class="category-card" href="#" onclick="showPage('sides')" style="--cat:var(--olive)">
+            <div class="category-card-info">
+              <span class="icon-circle"><svg class="icon" aria-hidden="true"><use href="#i-bowl"></use></svg></span>
+              <h3>مخلفات</h3>
+              <p>سالادها، ترشی‌ها و مخلفات کامل‌کننده‌ی سفره</p>
+              <span class="link-arrow">مشاهده منو <svg class="icon" aria-hidden="true"><use href="#i-arrow"></use></svg></span>
+            </div>
+            <div class="category-card-photo"><img src="side.jpg" alt="مخلفات" loading="lazy"></div>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- صفحه غذای ایرانی -->
+  <section id="iranian" class="page">
+    <div class="page-banner" style="--tint:#9C2B3B">
+      <div class="page-banner-bg" style="background-image:url('Iranian-food.jpg')"></div>
+      <div class="container page-banner-inner">
+        <span class="page-banner-icon"><svg class="icon" aria-hidden="true"><use href="#i-kabab"></use></svg></span>
+        <h1>غذای ایرانی</h1>
+        <p>میراث آشپزی ایرانی، تازه و خوش‌عطر روی سفره‌ی شما</p>
+      </div>
+    </div>
+    <div class="section">
+      <div class="container">
+        <div class="dish-grid dish-grid--3col">
+          <article class="dish">
+            <div class="dish-photo">
+              <img src="Kebab.jpg" alt="چلو کباب کوبیده" loading="lazy">
+            </div>
+            <div class="dish-body">
+              <div class="dish-name-row">
+                <span class="name">چلو کباب کوبیده</span>
+                <span class="leader"></span>
+                <span class="price">۱۸۵,۰۰۰ تومان</span>
+              </div>
+              <p class="dish-ingredients">گوشت چرخ‌کرده گوسفندی، پیاز رنده‌شده، نمک، فلفل سیاه، برنج ایرانی، زعفران، کره</p>
+              <span class="dish-tag" style="--cat:var(--pomegranate)"><i></i>غذای ایرانی</span>
+            </div>
+          </article>
+          <article class="dish">
+            <div class="dish-photo">
+              <img src="jooje.jpg" alt="جوجه کباب" loading="lazy">
+            </div>
+            <div class="dish-body">
+              <div class="dish-name-row">
+                <span class="name">جوجه کباب</span>
+                <span class="leader"></span>
+                <span class="price">۱۹۵,۰۰۰ تومان</span>
+              </div>
+              <p class="dish-ingredients">سینه مرغ، پیاز، آبلیمو، زعفران، رب گوجه‌فرنگی، نمک و فلفل</p>
+              <span class="dish-tag" style="--cat:var(--pomegranate)"><i></i>غذای ایرانی</span>
+            </div>
+          </article>
+          <article class="dish">
+            <div class="dish-photo">
+              <img src="qorme.jpg" alt="قورمه سبزی" loading="lazy">
+            </div>
+            <div class="dish-body">
+              <div class="dish-name-row">
+                <span class="name">قورمه سبزی</span>
+                <span class="leader"></span>
+                <span class="price">۱۶۵,۰۰۰ تومان</span>
+              </div>
+              <p class="dish-ingredients">سبزی قورمه (جعفری، تره، شنبلیله)، گوشت خورشتی، لوبیا قرمز، لیمو عمانی، پیاز</p>
+              <span class="dish-tag" style="--cat:var(--pomegranate)"><i></i>غذای ایرانی</span>
+            </div>
+          </article>
+          <article class="dish">
+            <div class="dish-photo">
+              <img src="zereshk.jpg" alt="زرشک پلو با مرغ" loading="lazy">
+            </div>
+            <div class="dish-body">
+              <div class="dish-name-row">
+                <span class="name">زرشک پلو با مرغ</span>
+                <span class="leader"></span>
+                <span class="price">۱۷۵,۰۰۰ تومان</span>
+              </div>
+              <p class="dish-ingredients">برنج ایرانی، زرشک، ران مرغ، زعفران، پیاز، کره</p>
+              <span class="dish-tag" style="--cat:var(--pomegranate)"><i></i>غذای ایرانی</span>
+            </div>
+          </article>
+          <article class="dish">
+            <div class="dish-photo">
+              <img src="fesenjan.jpg" alt="فسنجان" loading="lazy">
+            </div>
+            <div class="dish-body">
+              <div class="dish-name-row">
+                <span class="name">فسنجان</span>
+                <span class="leader"></span>
+                <span class="price">۲۱۰,۰۰۰ تومان</span>
+              </div>
+              <p class="dish-ingredients">مرغ، گردوی آسیاب‌شده، رب انار، پیاز، شکر، برنج ایرانی</p>
+              <span class="dish-tag" style="--cat:var(--pomegranate)"><i></i>غذای ایرانی</span>
+            </div>
+          </article>
+          <article class="dish">
+            <div class="dish-photo">
+              <img src="baq.jpg" alt="باقالی پلو با ماهیچه" loading="lazy">
+            </div>
+            <div class="dish-body">
+              <div class="dish-name-row">
+                <span class="name">باقالی پلو با ماهیچه</span>
+                <span class="leader"></span>
+                <span class="price">۲۴۰,۰۰۰ تومان</span>
+              </div>
+              <p class="dish-ingredients">باقالی، شوید، برنج ایرانی، ماهیچه گوسفندی، زعفران، پیاز، سیر</p>
+              <span class="dish-tag" style="--cat:var(--pomegranate)"><i></i>غذای ایرانی</span>
+            </div>
+          </article>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- صفحه فست‌فود -->
+  <section id="fastfood" class="page">
+    <div class="page-banner" style="--tint:#9C4A20">
+      <div class="page-banner-bg" style="background-image:url('fast.jpg')"></div>
+      <div class="container page-banner-inner">
+        <span class="page-banner-icon"><svg class="icon" aria-hidden="true"><use href="#i-burger"></use></svg></span>
+        <h1>فست‌فود</h1>
+        <p>داغ، سریع و پر از طعم؛ برای وقت‌هایی که عجله دارید</p>
+      </div>
+    </div>
+    <div class="section">
+      <div class="container">
+        <div class="dish-grid dish-grid--3col">
+          <article class="dish">
+            <div class="dish-photo">
+              <img src="pizza2.jpg" alt="پیتزا مخصوص" loading="lazy">
+            </div>
+            <div class="dish-body">
+              <div class="dish-name-row">
+                <span class="name">پیتزا مخصوص</span>
+                <span class="leader"></span>
+                <span class="price">۱۶۰,۰۰۰ تومان</span>
+              </div>
+              <p class="dish-ingredients">خمیر پیتزا، سس گوجه، پنیر پیتزا، مرغ و پپرونی، فلفل دلمه‌ای، قارچ، زیتون</p>
+              <span class="dish-tag" style="--cat:var(--rust)"><i></i>فست‌فود</span>
+            </div>
+          </article>
+          <article class="dish">
+            <div class="dish-photo">
+              <img src="ham.jpg" alt="همبرگر" loading="lazy">
+            </div>
+            <div class="dish-body">
+              <div class="dish-name-row">
+                <span class="name">همبرگر</span>
+                <span class="leader"></span>
+                <span class="price">۱۱۰,۰۰۰ تومان</span>
+              </div>
+              <p class="dish-ingredients">گوشت گوساله چرخ‌کرده، نان برگر، پنیر چدار، کاهو، گوجه، خیارشور، سس مخصوص</p>
+              <span class="dish-tag" style="--cat:var(--rust)"><i></i>فست‌فود</span>
+            </div>
+          </article>
+          <article class="dish">
+            <div class="dish-photo">
+              <img src="sanchik.jpg" alt="ساندویچ مرغ" loading="lazy">
+            </div>
+            <div class="dish-body">
+              <div class="dish-name-row">
+                <span class="name">ساندویچ مرغ</span>
+                <span class="leader"></span>
+                <span class="price">۹۵,۰۰۰ تومان</span>
+              </div>
+              <p class="dish-ingredients">فیله مرغ سوخاری، نان باگت، کاهو، گوجه، سس مایونز، خیارشور</p>
+              <span class="dish-tag" style="--cat:var(--rust)"><i></i>فست‌فود</span>
+            </div>
+          </article>
+          <article class="dish">
+            <div class="dish-photo">
+              <img src="hotdog.jpeg" alt="هات‌داگ" loading="lazy">
+            </div>
+            <div class="dish-body">
+              <div class="dish-name-row">
+                <span class="name">هات‌داگ</span>
+                <span class="leader"></span>
+                <span class="price">۸۵,۰۰۰ تومان</span>
+              </div>
+              <p class="dish-ingredients">سوسیس، نان هات‌داگ، پیاز، خردل، کچاپ، خیارشور</p>
+              <span class="dish-tag" style="--cat:var(--rust)"><i></i>فست‌فود</span>
+            </div>
+          </article>
+          <article class="dish">
+            <div class="dish-photo">
+              <img src="fried.jpg" alt="سیب‌زمینی سرخ‌کرده" loading="lazy">
+            </div>
+            <div class="dish-body">
+              <div class="dish-name-row">
+                <span class="name">سیب‌زمینی سرخ‌کرده</span>
+                <span class="leader"></span>
+                <span class="price">۶۵,۰۰۰ تومان</span>
+              </div>
+              <p class="dish-ingredients">سیب‌زمینی، روغن، نمک، ادویه مخصوص</p>
+              <span class="dish-tag" style="--cat:var(--rust)"><i></i>فست‌فود</span>
+            </div>
+          </article>
+          <article class="dish">
+            <div class="dish-photo">
+              <img src="naget.jpg" alt="ناگت مرغ" loading="lazy">
+            </div>
+            <div class="dish-body">
+              <div class="dish-name-row">
+                <span class="name">ناگت مرغ</span>
+                <span class="leader"></span>
+                <span class="price">۹۰,۰۰۰ تومان</span>
+              </div>
+              <p class="dish-ingredients">سینه مرغ، پانکو، ادویه‌جات، سس گوجه یا باربیکیو</p>
+              <span class="dish-tag" style="--cat:var(--rust)"><i></i>فست‌فود</span>
+            </div>
+          </article>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- صفحه نوشیدنی -->
+  <section id="drinks" class="page">
+    <div class="page-banner" style="--tint:#0E6E68">
+      <div class="page-banner-bg" style="background-image:url('drinks.jpg')"></div>
+      <div class="container page-banner-inner">
+        <span class="page-banner-icon"><svg class="icon" aria-hidden="true"><use href="#i-cup"></use></svg></span>
+        <h1>نوشیدنی</h1>
+        <p>گرم یا خنک، همراه همیشگی هر وعده</p>
+      </div>
+    </div>
+    <div class="section">
+      <div class="container">
+        <div class="dish-grid dish-grid--3col">
+          <article class="dish">
+            <div class="dish-photo">
+              <img src="dooq.jpg" alt="دوغ" loading="lazy">
+            </div>
+            <div class="dish-body">
+              <div class="dish-name-row">
+                <span class="name">دوغ</span>
+                <span class="leader"></span>
+                <span class="price">۳۰,۰۰۰ تومان</span>
+              </div>
+              <p class="dish-ingredients">ماست، آب، نعنا خشک، نمک، گاز طبیعی</p>
+              <span class="dish-tag" style="--cat:var(--teal)"><i></i>نوشیدنی</span>
+            </div>
+          </article>
+          <article class="dish">
+            <div class="dish-photo">
+              <img src="juice.jpg" alt="آب پرتقال طبیعی" loading="lazy">
+            </div>
+            <div class="dish-body">
+              <div class="dish-name-row">
+                <span class="name">آب پرتقال طبیعی</span>
+                <span class="leader"></span>
+                <span class="price">۴۵,۰۰۰ تومان</span>
+              </div>
+              <p class="dish-ingredients">پرتقال تازه، بدون شکر افزوده</p>
+              <span class="dish-tag" style="--cat:var(--teal)"><i></i>نوشیدنی</span>
+            </div>
+          </article>
+          <article class="dish">
+            <div class="dish-photo">
+              <img src="chai.jpeg" alt="چای سنتی" loading="lazy">
+            </div>
+            <div class="dish-body">
+              <div class="dish-name-row">
+                <span class="name">چای سنتی</span>
+                <span class="leader"></span>
+                <span class="price">۲۵,۰۰۰ تومان</span>
+              </div>
+              <p class="dish-ingredients">چای سیاه، هل، نبات</p>
+              <span class="dish-tag" style="--cat:var(--teal)"><i></i>نوشیدنی</span>
+            </div>
+          </article>
+          <article class="dish">
+            <div class="dish-photo">
+              <img src="sharbat.jpg" alt="شربت آلبالو" loading="lazy">
+            </div>
+            <div class="dish-body">
+              <div class="dish-name-row">
+                <span class="name">شربت آلبالو</span>
+                <span class="leader"></span>
+                <span class="price">۳۵,۰۰۰ تومان</span>
+              </div>
+              <p class="dish-ingredients">آلبالو، شکر، آب، یخ</p>
+              <span class="dish-tag" style="--cat:var(--teal)"><i></i>نوشیدنی</span>
+            </div>
+          </article>
+          <article class="dish">
+            <div class="dish-photo">
+              <img src="soda.jpg" alt="نوشابه" loading="lazy">
+            </div>
+            <div class="dish-body">
+              <div class="dish-name-row">
+                <span class="name">نوشابه</span>
+                <span class="leader"></span>
+                <span class="price">۲۰,۰۰۰ تومان</span>
+              </div>
+              <p class="dish-ingredients">نوشابه گازدار (کوکاکولا، فانتا، اسپرایت)</p>
+              <span class="dish-tag" style="--cat:var(--teal)"><i></i>نوشیدنی</span>
+            </div>
+          </article>
+          <article class="dish">
+            <div class="dish-photo">
+              <img src="Espresso.jpg" alt="قهوه" loading="lazy">
+            </div>
+            <div class="dish-body">
+              <div class="dish-name-row">
+                <span class="name">قهوه</span>
+                <span class="leader"></span>
+                <span class="price">۵۰,۰۰۰ تومان</span>
+              </div>
+              <p class="dish-ingredients">دانه قهوه تازه‌آسیاب، آب، شیر (به دلخواه)</p>
+              <span class="dish-tag" style="--cat:var(--teal)"><i></i>نوشیدنی</span>
+            </div>
+          </article>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- صفحه مخلفات -->
+  <section id="sides" class="page">
+    <div class="page-banner" style="--tint:#5B6B34">
+      <div class="page-banner-bg" style="background-image:url('side.jpg')"></div>
+      <div class="container page-banner-inner">
+        <span class="page-banner-icon"><svg class="icon" aria-hidden="true"><use href="#i-bowl"></use></svg></span>
+        <h1>مخلفات</h1>
+        <p>تکمیل‌کننده‌های کوچک برای یک سفره‌ی کامل</p>
+      </div>
+    </div>
+    <div class="section">
+      <div class="container">
+        <div class="dish-grid dish-grid--3col">
+          <article class="dish">
+            <div class="dish-photo">
+              <img src="shirazi.jpg" alt="سالاد شیرازی" loading="lazy">
+            </div>
+            <div class="dish-body">
+              <div class="dish-name-row">
+                <span class="name">سالاد شیرازی</span>
+                <span class="leader"></span>
+                <span class="price">۵۵,۰۰۰ تومان</span>
+              </div>
+              <p class="dish-ingredients">خیار، گوجه، پیاز، آبلیمو، نعنا خشک، روغن زیتون</p>
+              <span class="dish-tag" style="--cat:var(--olive)"><i></i>مخلفات</span>
+            </div>
+          </article>
+          <article class="dish">
+            <div class="dish-photo">
+              <img src="maast.jpg" alt="ماست و خیار" loading="lazy">
+            </div>
+            <div class="dish-body">
+              <div class="dish-name-row">
+                <span class="name">ماست و خیار</span>
+                <span class="leader"></span>
+                <span class="price">۴۵,۰۰۰ تومان</span>
+              </div>
+              <p class="dish-ingredients">ماست، خیار، نعنا خشک، گردو، سیر</p>
+              <span class="dish-tag" style="--cat:var(--olive)"><i></i>مخلفات</span>
+            </div>
+          </article>
+          <article class="dish">
+            <div class="dish-photo">
+              <img src="torshi.jpg" alt="ترشی مخلوط" loading="lazy">
+            </div>
+            <div class="dish-body">
+              <div class="dish-name-row">
+                <span class="name">ترشی مخلوط</span>
+                <span class="leader"></span>
+                <span class="price">۴۰,۰۰۰ تومان</span>
+              </div>
+              <p class="dish-ingredients">سبزیجات فصل، سرکه، نمک، ادویه‌جات</p>
+              <span class="dish-tag" style="--cat:var(--olive)"><i></i>مخلفات</span>
+            </div>
+          </article>
+          <article class="dish">
+            <div class="dish-photo">
+              <img src="zeytoon.jpg" alt="زیتون پرورده" loading="lazy">
+            </div>
+            <div class="dish-body">
+              <div class="dish-name-row">
+                <span class="name">زیتون پرورده</span>
+                <span class="leader"></span>
+                <span class="price">۴۸,۰۰۰ تومان</span>
+              </div>
+              <p class="dish-ingredients">زیتون، گردو، رب انار، سیر، نعنا</p>
+              <span class="dish-tag" style="--cat:var(--olive)"><i></i>مخلفات</span>
+            </div>
+          </article>
+          <article class="dish">
+            <div class="dish-photo">
+              <img src="nan.jpg" alt="نان بربری" loading="lazy">
+            </div>
+            <div class="dish-body">
+              <div class="dish-name-row">
+                <span class="name">نان بربری</span>
+                <span class="leader"></span>
+                <span class="price">۱۵,۰۰۰ تومان</span>
+              </div>
+              <p class="dish-ingredients">آرد گندم، خمیرمایه، کنجد، سیاه‌دانه</p>
+              <span class="dish-tag" style="--cat:var(--olive)"><i></i>مخلفات</span>
+            </div>
+          </article>
+          <article class="dish">
+            <div class="dish-photo">
+              <img src="kashk.jpg" alt="کشک بادمجان" loading="lazy">
+            </div>
+            <div class="dish-body">
+              <div class="dish-name-row">
+                <span class="name">کشک بادمجان</span>
+                <span class="leader"></span>
+                <span class="price">۷۰,۰۰۰ تومان</span>
+              </div>
+              <p class="dish-ingredients">بادمجان، کشک، پیاز داغ، نعنا داغ، گردو</p>
+              <span class="dish-tag" style="--cat:var(--olive)"><i></i>مخلفات</span>
+            </div>
+          </article>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="container footer-grid">
+    <div class="footer-brand">
+      <a href="#" class="logo" onclick="showPage('home')">
+        <svg class="icon" aria-hidden="true"><use href="#i-sun"></use></svg>
+        کافه <span class="logo-accent">نگاتیو</span>
+      </a>
+      <p>طعم اصیل ایرانی و فست‌فود امروزی، کنار هم روی یک سفره‌ی روشن. از صبح تا نیمه‌شب میزبان شما هستیم.</p>
+      <div class="social-icons">
+        <a href="#" aria-label="اینستاگرام کافه نگاتیو">
+          <svg class="icon" aria-hidden="true"><use href="#i-instagram"></use></svg>
+        </a>
+        <a href="#" aria-label="تلگرام کافه نگاتیو">
+          <svg class="icon" aria-hidden="true"><use href="#i-telegram"></use></svg>
+        </a>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h4>دسترسی سریع</h4>
+      <ul>
+        <li><a href="#" onclick="showPage('home')">خانه</a></li>
+        <li><a href="#" onclick="showPage('iranian')">غذای ایرانی</a></li>
+        <li><a href="#" onclick="showPage('fastfood')">فست‌فود</a></li>
+        <li><a href="#" onclick="showPage('drinks')">نوشیدنی</a></li>
+        <li><a href="#" onclick="showPage('sides')">مخلفات</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>اطلاعات تماس</h4>
+      <div class="footer-contact-line">
+        <svg class="icon" aria-hidden="true"><use href="#i-pin"></use></svg>
+        <span>تهران، خیابان ولیعصر، نرسیده به میدان ونک</span>
+      </div>
+      <div class="footer-contact-line">
+        <svg class="icon" aria-hidden="true"><use href="#i-phone"></use></svg>
+        <span>۰۲۱-۱۲۳۴۵۶۷۸</span>
+      </div>
+      <div class="footer-contact-line">
+        <svg class="icon" aria-hidden="true"><use href="#i-clock"></use></svg>
+        <span>ساعت کاری: هر روز ۱۲ تا ۲۴</span>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© تمامی حقوق برای کافه نگاتیو محفوظ است.</p>
+  </div>
+</footer>
+
+<script>
+// ==========================================
+// مدیریت منوی موبایل (Hamburger Menu)
+// ==========================================
+document.addEventListener('DOMContentLoaded', function () {
+  var toggle = document.getElementById('nav-toggle');
+  var nav = document.getElementById('main-nav');
+
+  if (toggle && nav) {
+    toggle.addEventListener('click', function () {
+      var isOpen = nav.classList.toggle('open');
+      toggle.classList.toggle('open', isOpen);
+      toggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+    });
+
+    nav.querySelectorAll('a').forEach(function (link) {
+      link.addEventListener('click', function () {
+        nav.classList.remove('open');
+        toggle.classList.remove('open');
+        toggle.setAttribute('aria-expanded', 'false');
+      });
+    });
+  }
+});
+
+// ==========================================
+// سایه‌ی هدر هنگام اسکرول
+// ==========================================
+(function () {
+  var header = document.getElementById('site-header');
+  if (!header) return;
+  function onScroll () {
+    header.classList.toggle('is-scrolled', window.scrollY > 8);
+  }
+  onScroll();
+  window.addEventListener('scroll', onScroll, { passive: true });
+})();
+
+// ==========================================
+// تابع نمایش صفحات (مخصوص نسخه تک‌فایل)
+// ==========================================
+function showPage(pageId) {
+    var pages = document.querySelectorAll('.page');
+    pages.forEach(function(page) {
+        page.classList.remove('active', 'is-entering');
+        page.style.display = 'none';
+    });
+
+    var target = document.getElementById(pageId);
+    if (target) {
+        target.style.display = 'block';
+        target.classList.add('active');
+        // ری‌فلو برای اجرای دوباره‌ی انیمیشن ورود صفحه
+        void target.offsetWidth;
+        target.classList.add('is-entering');
+    }
+
+    var navLinks = document.querySelectorAll('.main-nav a');
+    navLinks.forEach(function(link) {
+        link.classList.remove('active');
+        if (link.getAttribute('onclick') && link.getAttribute('onclick').includes(pageId)) {
+            link.classList.add('active');
+        }
+    });
+
+    window.scrollTo(0, 0);
+}
+
+// نمایش صفحه‌ی اول هنگام لود
+document.addEventListener('DOMContentLoaded', function() {
+    var home = document.getElementById('home');
+    if (home) {
+        home.style.display = 'block';
+    }
+    var others = document.querySelectorAll('.page:not(#home)');
+    others.forEach(function(p) {
+        p.style.display = 'none';
+    });
+});
+</script>
+</body>
+</html>
